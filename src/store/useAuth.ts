@@ -1,8 +1,19 @@
-// store/useAuth.ts
 import { create } from 'zustand';
 import supabase from '../utils/supabase';
 
-export const useAuth = create((set) => ({
+// Define the types for the store
+type AuthState = {
+  user: any;
+  error: string | null;
+  handleLogin: (
+    email: string,
+    password: string
+  ) => Promise<{ success: boolean; error: string | null }>;
+  handleSignOut: () => Promise<{ success: boolean; error: string | null }>;
+};
+
+// Create the Zustand store with typed state and actions
+export const useAuth = create<AuthState>((set) => ({
   user: null,
   error: null,
 
@@ -19,13 +30,15 @@ export const useAuth = create((set) => ({
         return { success: false, error: error.message };
       }
 
-      set({ user: data?.user, error: null });
+      set({ user: data?.user || null, error: null });
       return { success: true, error: null };
     } catch (error) {
       set({ error: 'An unexpected error occurred.' });
       return { success: false, error: 'An unexpected error occurred.' };
     }
   },
+
+  // Sign out function
   handleSignOut: async () => {
     try {
       const { error } = await supabase.auth.signOut();

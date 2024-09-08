@@ -1,14 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from './ui/button';
 import { User, LogOut } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from './ui/dropdown-menu';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import { useAuth } from '../store/useAuth'; // Import useAuth from the Zustand store
 
@@ -49,21 +42,25 @@ export function Navbar() {
               <span className="ml-2 text-xl font-bold">YourLogo</span>
             </div>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <User className="h-5 w-5" />
-                  <span className="sr-only">User account</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuItem onSelect={handleLogout}>
+          <div className="hidden sm:ml-6 sm:flex sm:items-center relative">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center p-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+            >
+              <User className="h-5 w-5" />
+              <span className="sr-only">User account</span>
+            </button>
+            {isOpen && (
+              <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div
+                  onClick={handleLogout}
+                  className="cursor-pointer flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100"
+                >
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Log out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

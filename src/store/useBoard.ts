@@ -1,8 +1,23 @@
 import { create } from 'zustand';
 import supabase from '../utils/supabase';
 
-export const useBoard = create((set) => ({
-  boards: [],
+// Define types for the Board and the Zustand store
+type Board = {
+  id: string;
+  border_name: string;
+  user_id: string;
+};
+
+type BoardState = {
+  borders: Board[];
+  fetchBorders: () => Promise<void>;
+  addBorder: () => Promise<void>;
+  deleteBorder: (id: string) => Promise<void>;
+};
+
+// Create the Zustand store with typed state and actions
+export const useBoard = create<BoardState>((set) => ({
+  borders: [],
 
   fetchBorders: async () => {
     try {
@@ -20,7 +35,7 @@ export const useBoard = create((set) => ({
     try {
       const { data, error } = await supabase
         .from('borders')
-        .insert([{ border_name: 'someValue', user_id: 'hesam@hesam.com' }])
+        .insert([{ border_name: 'New Board', user_id: 'hesam@hesam.com' }])
         .select();
       if (error) {
         throw error;
