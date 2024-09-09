@@ -30,7 +30,13 @@ export const useAuth = create<AuthState>((set) => ({
         return { success: false, error: error.message };
       }
 
-      set({ user: data?.user || null, error: null });
+      const user = data?.user || null;
+
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user)); // Store user in local storage
+      }
+
+      set({ user, error: null });
       return { success: true, error: null };
     } catch (error) {
       set({ error: 'An unexpected error occurred.' });
@@ -48,6 +54,7 @@ export const useAuth = create<AuthState>((set) => ({
         return { success: false, error: error.message };
       }
 
+      localStorage.removeItem('user'); // Remove user from local storage
       set({ user: null, error: null }); // Clear user state on sign out
       return { success: true, error: null };
     } catch (error) {
