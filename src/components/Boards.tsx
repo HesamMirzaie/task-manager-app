@@ -1,26 +1,56 @@
-'use client';
-
-import { useEffect } from 'react';
-import { useBoard } from '../store/useBoard';
+import { useEffect, useState } from 'react';
 import { Trash, Plus } from 'lucide-react';
 import { motion } from 'framer-motion';
+import supabase from '../utils/supabase';
 
-export function Boards() {
-  const borders = useBoard((state) => state.borders);
-  const fetchBorders = useBoard((state) => state.fetchBorders);
-  const addBorder = useBoard((state) => state.addBorder);
-  const deleteBorder = useBoard((state) => state.deleteBorder);
+export function Boards({ user }: any) {
+  const [boards, setBoards] = useState<any[]>([]); // Initialize as an empty array
 
   useEffect(() => {
-    fetchBorders();
-  }, [fetchBorders]);
+    const fetchBoards = async () => {
+      try {
+        const { data, error } = await supabase.from('borders').select('*');
+        if (error) throw error;
+        setBoards(data);
+      } catch (error) {
+        console.error('Error fetching boards:', error);
+      }
+    };
+    fetchBoards();
+  }, []);
+
+  const addBorder = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('borders')
+        .insert([{ border_name: 'New Board', user_id: user.email }])
+        .select();
+
+      if (error) throw error;
+
+      setBoards((prevBoards) => [...prevBoards, ...data]); // Spread 'data' properly since it's an array
+    } catch (error) {
+      console.error('Error adding board:', error);
+    }
+  };
+
+  const deleteBorder = async (id: string) => {
+    try {
+      const { error } = await supabase.from('borders').delete().eq('id', id);
+      if (error) throw error;
+
+      setBoards((prevBoards) => prevBoards.filter((board) => board.id !== id));
+    } catch (error) {
+      console.error('Error deleting board:', error);
+    }
+  };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-4xl font-bold text-gray-800 mb-6">Your Boards</h1>
       <div className="w-full overflow-x-auto rounded-md border">
         <div className="flex space-x-4 p-4">
-          {borders?.map((border) => (
+          {boards?.map((border) => (
             <motion.div
               key={border.id}
               initial={{ opacity: 0, y: 20 }}

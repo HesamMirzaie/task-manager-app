@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { User, LogOut } from 'lucide-react';
 
-export function Navbar() {
+type NavbarProps = {
+  handleLogOut: () => void;
+  user: any;
+};
+
+export function Navbar({ handleLogOut, user }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -26,23 +31,33 @@ export function Navbar() {
               <span className="ml-2 text-xl font-bold">Task Manager</span>
             </div>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center relative">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center p-2 text-gray-500 hover:text-gray-700 focus:outline-none"
-            >
-              <User className="h-5 w-5" />
-              <span className="sr-only">User account</span>
-            </button>
-            {isOpen && (
-              <div className="absolute top-12 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="cursor-pointer flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
+          {
+            <div className="hidden sm:ml-6 sm:flex sm:items-center relative">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="inline-flex items-center p-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+              >
+                <User className="h-5 w-5" />
+                <span className="sr-only">User account</span>
+              </button>
+              {isOpen && (
+                <div className="absolute top-12 right-0 mt-2 w-56 rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-10 focus:outline-none">
+                  <div className="flex justify-center p-4 bg-gray-50 border-b border-gray-200">
+                    <span className="text-gray-700 font-medium">
+                      {user.user.email}
+                    </span>
+                  </div>
+                  <div
+                    onClick={handleLogOut}
+                    className="cursor-pointer flex items-center justify-center px-4 py-3 bg-pink-100 text-gray-700 hover:bg-pink-200 transition-colors duration-200 ease-in-out"
+                  >
+                    <LogOut className="mr-2 h-5 w-5 text-gray-600" />
+                    <span className="font-medium">Log out</span>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          }
         </div>
       </div>
     </nav>

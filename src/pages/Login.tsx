@@ -21,17 +21,13 @@ export function Login() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password } = data;
-    console.log(email, password);
-
     const { success, error: loginError } = await handleLogin(email, password);
-
     if (success) {
       navigate('/app');
     } else {
       setError(loginError || 'An unexpected error occurred.');
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
