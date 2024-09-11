@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Trash, Plus, Pen } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { motion } from 'framer-motion';
 import supabase from '../utils/supabase';
+import { Board } from './Board'; // Import the Board component
 
 export function Boards({ user }: { user: { email: string } }) {
   const [boards, setBoards] = useState<any[]>([]);
@@ -35,7 +36,6 @@ export function Boards({ user }: { user: { email: string } }) {
   };
 
   const editBoard = async (id: string, newName: string) => {
-    // setIsEditing(true);
     try {
       const { data, error } = await supabase
         .from('borders')
@@ -76,44 +76,14 @@ export function Boards({ user }: { user: { email: string } }) {
         transition={{ duration: 0.5 }}
       >
         {boards?.map((board) => (
-          <motion.div
+          <Board
             key={board.id}
-            layout
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-          >
-            <div className="p-6 flex flex-col justify-between h-full">
-              <h2 className="text-xl font-semibold text-indigo-800 truncate mb-4">
-                {board.border_name}
-              </h2>
-
-              <div className="flex justify-end space-x-2">
-                <button
-                  onClick={() =>
-                    editBoard(
-                      board.id,
-                      prompt('Enter new board name') || board.border_name
-                    )
-                  }
-                  className="text-indigo-500 hover:text-indigo-700 transition-colors duration-200"
-                  aria-label="Edit board"
-                >
-                  <Pen className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={() => deleteBoard(board.id)}
-                  className="text-red-500 hover:text-red-700 transition-colors duration-200"
-                  aria-label="Delete board"
-                >
-                  <Trash className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
+            board={board}
+            editBoard={editBoard}
+            deleteBoard={deleteBoard}
+          />
         ))}
+
         <motion.div
           layout
           initial={{ opacity: 0, scale: 0.9 }}
