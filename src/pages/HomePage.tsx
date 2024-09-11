@@ -1,9 +1,13 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, CheckCircle, Zap, Expand } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function LandingPage() {
   const [isScrolling, setIsScrolling] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,8 +28,29 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      {/* Navbar */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolling ? 'bg-gray-900/80 backdrop-blur-sm' : 'bg-transparent'
+        }`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center py-4">
+            <a href="#" className="text-2xl font-bold text-white">
+              Task manager
+            </a>
+            <button
+              onClick={() => navigate('/login')}
+              className="text-white border-white hover:bg-white hover:text-gray-900"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
-      <header className="bg-gradient-to-r from-blue-900 to-indigo-900 py-20 sm:py-32 relative">
+      <header className="bg-gradient-to-r from-blue-900 to-indigo-900 py-20 sm:py-32 relative pt-28">
         <div className="container mx-auto px-4 text-center">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
@@ -33,7 +58,7 @@ export default function LandingPage() {
             transition={{ duration: 0.5 }}
             className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight"
           >
-            Welcome to YourApp
+            Welcome to Task manager
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: -20 }}
@@ -73,7 +98,7 @@ export default function LandingPage() {
       <section id="features" className="py-20 sm:py-32 bg-gray-800">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-16">
-            Why Choose YourApp?
+            Why Choose Task manager?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
@@ -108,7 +133,7 @@ export default function LandingPage() {
       <section className="bg-blue-900 py-20 sm:py-32">
         <div className="container mx-auto px-4 text-center text-white">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Get Started with YourApp Today!
+            Get Started with Task manager Today!
           </h2>
           <p className="text-xl text-blue-200 mb-10 max-w-2xl mx-auto">
             Take control of your boards and workflows with our powerful app.
@@ -128,7 +153,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="bg-gray-900 py-8 border-t border-gray-800">
         <div className="container mx-auto px-4 text-center text-gray-400">
-          <p>&copy; 2024 YourApp. All rights reserved.</p>
+          <p>&copy; 2024 Task manager. All rights reserved.</p>
         </div>
       </footer>
     </div>
