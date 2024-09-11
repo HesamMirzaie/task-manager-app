@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Boards } from '../components/Boards';
+import { Boards } from '../components/board/Boards';
 import { Navbar } from '../components/Navbar';
 import supabase from '../utils/supabase';
 import { useNavigate } from 'react-router-dom';

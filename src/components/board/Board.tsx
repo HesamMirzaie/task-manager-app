@@ -16,6 +16,7 @@ export function Board({ board, editBoard, deleteBoard }: BoardProps) {
 
   return (
     <motion.div
+      onClick={() => console.log('Move to this board page')}
       layout
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}

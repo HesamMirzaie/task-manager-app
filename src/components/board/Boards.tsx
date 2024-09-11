@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Plus } from 'lucide-react';
 import { motion } from 'framer-motion';
-import supabase from '../utils/supabase';
-import { Board } from './Board';
+import supabase from '../../utils/supabase';
 import {
   DndContext,
   closestCenter,
@@ -18,6 +16,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { SortableBoard } from './SortableBoard'; // New component for sortable boards
+import AddNewBoard from './AddNewBoard';
 
 export function Boards({ user }: { user: { email: string } }) {
   const [boards, setBoards] = useState<any[]>([]);
@@ -92,9 +91,10 @@ export function Boards({ user }: { user: { email: string } }) {
 
   // DnD Kit sensors
   const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 30,
+      },
     })
   );
 
@@ -156,19 +156,7 @@ export function Boards({ user }: { user: { email: string } }) {
               />
             ))}
 
-            <motion.div
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              className="bg-indigo-100 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
-              onClick={addBoard}
-            >
-              <div className="p-6 flex flex-col items-center justify-center h-full">
-                <Plus className="h-12 w-12 text-indigo-500 mb-2" />
-                <p className="text-indigo-700 font-semibold">Add Board</p>
-              </div>
-            </motion.div>
+            <AddNewBoard addBoard={addBoard} />
           </motion.div>
         </SortableContext>
       </DndContext>
