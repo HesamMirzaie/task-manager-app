@@ -33,6 +33,7 @@ export function Board({ board, editBoard, deleteBoard }: BoardProps) {
             onClick={handleEdit}
             className="text-indigo-500 hover:text-indigo-700 transition-colors duration-200"
             aria-label="Edit board"
+            data-no-dnd="true"
           >
             <Pen className="h-5 w-5" />
           </button>
@@ -40,6 +41,7 @@ export function Board({ board, editBoard, deleteBoard }: BoardProps) {
             onClick={() => deleteBoard(board.id)}
             className="text-red-500 hover:text-red-700 transition-colors duration-200"
             aria-label="Delete board"
+            data-no-dnd="true"
           >
             <Trash className="h-5 w-5" />
           </button>
