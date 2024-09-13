@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import supabase from '../utils/supabase';
 
 type SignUpFormValues = {
   name: string;
   email: string;
-  password: any;
-  confirmPassword: any;
+  password: string;
+  confirmPassword: string;
 };
 
 export function SignUp() {
@@ -15,9 +16,28 @@ export function SignUp() {
     formState: { errors, isSubmitting },
   } = useForm<SignUpFormValues>();
 
+  const handleSignUp = async (data: SignUpFormValues) => {
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (error) {
+        console.error('Sign-up error:', error.message);
+        // You can display an error message to the user here
+        alert(`Sign-up failed: ${error.message}`);
+      } else {
+        alert('Sign-up successful! Please check your email for confirmation.');
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      alert('An unexpected error occurred. Please try again.');
+    }
+  };
+
   const onSubmit: SubmitHandler<SignUpFormValues> = async (data) => {
-    // Handle form submission, like sending data to the server
-    console.log('Form Data:', data);
+    await handleSignUp(data);
   };
 
   return (
