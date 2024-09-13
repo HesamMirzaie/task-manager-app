@@ -1,7 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../store/useAuth';
+import supabase from '../utils/supabase';
 
 type Inputs = {
   email: string;
@@ -9,9 +8,28 @@ type Inputs = {
 };
 
 export function Login() {
-  const [error, setError] = useState<string | null>(null);
-  const handleLogin = useAuth((state) => state.handleLogin); // Import the login function from zustand store
   const navigate = useNavigate();
+
+  const handleLogin = async (data: Inputs) => {
+    try {
+      // Using signInWithPassword instead of signUp
+      const { error } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (error) {
+        console.error('Login error:', error.message);
+        // Display an error message to the user
+        return { success: false, error: error.message };
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      return { success: false, error: 'An unexpected error occurred.' };
+    }
+  };
 
   const {
     register,
@@ -20,15 +38,15 @@ export function Login() {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const { email, password } = data;
-
-    const { success, error: loginError } = await handleLogin(email, password);
+    const { success, error: loginError } = await handleLogin(data);
     if (success) {
+      alert('Login successful!');
       navigate('/app');
     } else {
-      setError(loginError || 'An unexpected error occurred.');
+      alert(`Login failed: ${loginError}`);
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
@@ -74,7 +92,6 @@ export function Login() {
               <p className="text-sm text-red-500">{errors.password.message}</p>
             )}
           </div>
-          {error && <p className="text-sm text-red-500">{error}</p>}
           <button
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -14,10 +14,23 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { SortableBoard } from './SortableBoard'; // New component for sortable boards
-import AddNewBoard from './AddNewBoard';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '../ui/sheet';
+import { Button } from '../ui/button';
+import { Label } from '@radix-ui/react-label';
+import { Input } from '../ui/input';
 
 export function Boards({ user }: { user: { email: string } }) {
   const [boards, setBoards] = useState<any[]>([]);
+  const [newBoardName, setNewBoardName] = useState(''); // State to track new board name
 
   useEffect(() => {
     const fetchBoards = async () => {
@@ -41,7 +54,7 @@ export function Boards({ user }: { user: { email: string } }) {
         .from('borders')
         .insert([
           {
-            border_name: 'New Board',
+            border_name: newBoardName,
             user_id: user.email,
             order: boards.length, // New board gets the next order value
           },
@@ -51,6 +64,7 @@ export function Boards({ user }: { user: { email: string } }) {
       if (error) throw error;
 
       setBoards((prevBoards) => [...prevBoards, ...data]);
+      setNewBoardName(''); // Reset the input field after adding the board
     } catch (error) {
       console.error('Error adding board:', error);
     }
@@ -108,13 +122,11 @@ export function Boards({ user }: { user: { email: string } }) {
 
       // Update the order in Supabase
       try {
-        // Prepare the updated order data
         const updates = reorderedBoards.map((board, index) => ({
           id: board.id,
           order: index,
         }));
 
-        // Send batch update request to Supabase
         const { error } = await supabase.from('borders').upsert(updates);
 
         if (error) throw error;
@@ -128,7 +140,45 @@ export function Boards({ user }: { user: { email: string } }) {
 
   return (
     <div className="p-8 bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen">
-      <h1 className="text-4xl font-bold text-indigo-900 mb-8">Your Boards</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold text-indigo-900">Your Boards</h1>
+
+        {/* Add New Board button opens the sheet */}
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline">Add New Board</Button>
+          </SheetTrigger>
+          <SheetContent className="bg-white">
+            <SheetHeader>
+              <SheetTitle>Add New Board</SheetTitle>
+              <SheetDescription>
+                Create a new board by providing a name below.
+              </SheetDescription>
+            </SheetHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="boardName" className="text-right">
+                  Board Name
+                </Label>
+                <Input
+                  id="boardName"
+                  value={newBoardName}
+                  onChange={(e) => setNewBoardName(e.target.value)}
+                  placeholder="Enter board name"
+                  className="col-span-3"
+                />
+              </div>
+            </div>
+            <SheetFooter>
+              <SheetClose asChild>
+                <Button onClick={addBoard} type="submit">
+                  Create Board
+                </Button>
+              </SheetClose>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
+      </div>
 
       <DndContext
         sensors={sensors}
@@ -153,8 +203,6 @@ export function Boards({ user }: { user: { email: string } }) {
                 deleteBoard={deleteBoard}
               />
             ))}
-
-            <AddNewBoard addBoard={addBoard} />
           </motion.div>
         </SortableContext>
       </DndContext>
