@@ -22,7 +22,7 @@ export function Board({ board, editBoard, deleteBoard }: BoardProps) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.3 }}
-      className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+      className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden w-72"
     >
       <div className="p-6 flex flex-col justify-between h-full">
         <h2 className="text-xl font-semibold text-indigo-800 truncate mb-4">
