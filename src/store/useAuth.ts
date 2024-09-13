@@ -9,7 +9,6 @@ type AuthState = {
     email: string,
     password: string
   ) => Promise<{ success: boolean; error: string | null }>;
-  handleSignOut: () => Promise<{ success: boolean; error: string | null }>;
 };
 
 // Create the Zustand store with typed state and actions
@@ -36,24 +35,6 @@ export const useAuth = create<AuthState>((set) => ({
       return { success: true, error: null };
     } catch (error) {
       set({ error: 'An unexpected error occurred.' });
-      return { success: false, error: 'An unexpected error occurred.' };
-    }
-  },
-
-  // Sign out function
-  handleSignOut: async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-
-      if (error) {
-        set({ error: error.message });
-        return { success: false, error: error.message };
-      }
-
-      set({ user: null, error: null }); // Clear user state on sign out
-      return { success: true, error: null };
-    } catch (error) {
-      set({ error: 'An unexpected error occurred during sign out.' });
       return { success: false, error: 'An unexpected error occurred.' };
     }
   },

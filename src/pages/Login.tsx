@@ -21,6 +21,7 @@ export function Login() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email, password } = data;
+
     const { success, error: loginError } = await handleLogin(email, password);
     if (success) {
       navigate('/app');
