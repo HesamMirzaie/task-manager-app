@@ -16,14 +16,7 @@ import AddBoardButton from './AddBoardButton';
 import { useBoardStore } from '../../store/useBoardStore';
 
 export function Boards({ user }: { user: { email: string } }) {
-  const {
-    boards,
-    fetchBoards,
-    addBoard,
-    editBoard,
-    deleteBoard,
-    reorderBoards,
-  } = useBoardStore(); // Zustand store
+  const { boards, fetchBoards, addBoard, reorderBoards } = useBoardStore();
 
   useEffect(() => {
     fetchBoards(user.email);
@@ -45,7 +38,7 @@ export function Boards({ user }: { user: { email: string } }) {
 
   return (
     <div className="p-8 bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex items-center justify-between mb-8">
         <h1 className="text-4xl font-bold text-indigo-900">Your Boards</h1>
         <AddBoardButton
           onAdd={(boardName) => addBoard(boardName, user.email)}
@@ -61,11 +54,7 @@ export function Boards({ user }: { user: { email: string } }) {
           items={boards.map((board) => board.id)}
           strategy={horizontalListSortingStrategy}
         >
-          <BoardList
-            boards={boards}
-            editBoard={editBoard}
-            deleteBoard={deleteBoard}
-          />
+          <BoardList boards={boards} />
         </SortableContext>
       </DndContext>
     </div>

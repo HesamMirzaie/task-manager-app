@@ -4,15 +4,9 @@ import { Board } from './Board';
 
 interface SortableBoardProps {
   board: any;
-  editBoard: (id: string, newName: string) => void;
-  deleteBoard: (id: string) => void;
 }
 
-export function SortableBoard({
-  board,
-  editBoard,
-  deleteBoard,
-}: SortableBoardProps) {
+export function SortableBoard({ board }: SortableBoardProps) {
   const {
     attributes,
     listeners,
@@ -30,7 +24,7 @@ export function SortableBoard({
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <Board board={board} editBoard={editBoard} deleteBoard={deleteBoard} />
+      <Board board={board} />
     </div>
   );
 }

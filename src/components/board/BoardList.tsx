@@ -3,15 +3,9 @@ import { SortableBoard } from './SortableBoard';
 
 interface BoardListProps {
   boards: any[];
-  editBoard: (id: string, newName: string) => void;
-  deleteBoard: (id: string) => void;
 }
 
-const BoardList: React.FC<BoardListProps> = ({
-  boards,
-  editBoard,
-  deleteBoard,
-}) => {
+const BoardList: React.FC<BoardListProps> = ({ boards }) => {
   return (
     <motion.div
       className="flex gap-6 overflow-x-auto overflow-y-hidden"
@@ -19,13 +13,8 @@ const BoardList: React.FC<BoardListProps> = ({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {boards?.map((board) => (
-        <SortableBoard
-          key={board.id}
-          board={board}
-          editBoard={editBoard}
-          deleteBoard={deleteBoard}
-        />
+      {boards.map((board) => (
+        <SortableBoard key={board.id} board={board} />
       ))}
     </motion.div>
   );

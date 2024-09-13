@@ -1,17 +1,36 @@
+import { useState } from 'react';
 import { Trash, Pen } from 'lucide-react';
 import { motion } from 'framer-motion';
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from '../ui/alert-dialog'; // Adjust the path as needed
+import { useBoardStore } from '../../store/useBoardStore';
 
 interface BoardProps {
   board: any;
-  editBoard: (id: string, newName: string) => void;
-  deleteBoard: (id: string) => void;
 }
 
-export function Board({ board, editBoard, deleteBoard }: BoardProps) {
+export function Board({ board }: BoardProps) {
+  const { editBoard, deleteBoard } = useBoardStore();
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // State for dialog visibility
+
   const handleEdit = () => {
     const newName =
       prompt('Enter new board name', board.border_name) || board.border_name;
     editBoard(board.id, newName);
+  };
+
+  const handleDelete = () => {
+    deleteBoard(board.id);
+    setIsDialogOpen(false); // Close dialog after deletion
   };
 
   return (
@@ -34,18 +53,37 @@ export function Board({ board, editBoard, deleteBoard }: BoardProps) {
             onClick={handleEdit}
             className="text-indigo-500 hover:text-indigo-700 transition-colors duration-200"
             aria-label="Edit board"
-            data-no-dnd="true"
           >
             <Pen className="h-5 w-5" />
           </button>
-          <button
-            onClick={() => deleteBoard(board.id)}
-            className="text-red-500 hover:text-red-700 transition-colors duration-200"
-            aria-label="Delete board"
-            data-no-dnd="true"
-          >
-            <Trash className="h-5 w-5" />
-          </button>
+          <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <AlertDialogTrigger>
+              <button
+                onClick={() => setIsDialogOpen(true)}
+                className="text-red-500 hover:text-red-700 transition-colors duration-200"
+                aria-label="Delete board"
+              >
+                <Trash className="h-5 w-5" />
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent className=" bg-white">
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action will permanently delete the board. Are you sure
+                  you want to proceed?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={() => setIsDialogOpen(false)}>
+                  Cancel
+                </AlertDialogCancel>
+                <AlertDialogAction onClick={handleDelete}>
+                  Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </div>
     </motion.div>

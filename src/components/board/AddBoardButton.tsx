@@ -1,14 +1,8 @@
 import { useState } from 'react';
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-} from '../ui/sheet';
 import { Button } from '../ui/button';
+
 import { Input } from '../ui/input';
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from '../ui/dialog';
 
 interface AddBoardButtonProps {
   onAdd: (boardName: string) => void;
@@ -16,13 +10,13 @@ interface AddBoardButtonProps {
 
 const AddBoardButton: React.FC<AddBoardButtonProps> = ({ onAdd }) => {
   const [boardName, setBoardName] = useState('');
-  const [isOpen, setIsOpen] = useState(false); // State to control the Sheet visibility
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleAddBoard = () => {
     if (boardName.trim() !== '') {
       onAdd(boardName);
       setBoardName('');
-      setIsOpen(false); // Close the Sheet after adding the board
+      setIsDialogOpen(false); // Close the dialog after adding the board
     }
   };
 
@@ -30,40 +24,45 @@ const AddBoardButton: React.FC<AddBoardButtonProps> = ({ onAdd }) => {
     <>
       <Button
         className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md"
-        onClick={() => setIsOpen(true)} // Open the Sheet when the button is clicked
+        onClick={() => setIsDialogOpen(true)}
       >
         Add New Board
       </Button>
 
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        {' '}
-        {/* Control Sheet open/close */}
-        <SheetContent className="bg-white">
-          <SheetHeader>
-            <SheetTitle>Add New Board</SheetTitle>
-            <SheetDescription>
-              Create a new board by providing a name below.
-            </SheetDescription>
-          </SheetHeader>
-          <div className="grid gap-4 py-4">
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="p-6 bg-white rounded-lg shadow-lg max-w-md mx-auto">
+          <DialogTitle className="text-2xl font-semibold mb-4">
+            Add New Board
+          </DialogTitle>
+          <div className="py-4">
             <Input
               id="boardName"
               value={boardName}
               onChange={(e) => setBoardName(e.target.value)}
               placeholder="Enter board name"
-              className="col-span-3"
+              className="w-full border-gray-300 rounded-md shadow-sm"
             />
           </div>
-          <SheetFooter>
+          <DialogFooter className="flex justify-end space-x-2">
+            <Button
+              variant="outline"
+              onClick={() => setIsDialogOpen(false)}
+              className="text-gray-600 border-gray-300"
+            >
+              Cancel
+            </Button>
             <Button
               onClick={handleAddBoard}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white"
+              disabled={boardName.trim() === ''}
+              className={`bg-indigo-600 text-white hover:bg-indigo-700 ${
+                boardName.trim() === '' ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
             >
               Create Board
             </Button>
-          </SheetFooter>
-        </SheetContent>
-      </Sheet>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
