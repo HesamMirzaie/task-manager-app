@@ -29,7 +29,7 @@ export default function App() {
   return (
     <div className="overflow-x-hidden">
       <Navbar handleLogOut={handleLogOut} user={user} />
-      <Boards user={user.user} />
+      {user ? <Boards user={user.user} /> : <div>No User Found!!!</div>}
     </div>
   );
 }

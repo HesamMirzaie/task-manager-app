@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import supabase from '../utils/supabase';
+import supabase from '../../utils/supabase';
 
 type Inputs = {
   email: string;
@@ -9,6 +9,12 @@ type Inputs = {
 
 export function Login() {
   const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<Inputs>();
 
   const handleLogin = async (data: Inputs) => {
     try {
@@ -30,12 +36,6 @@ export function Login() {
       return { success: false, error: 'An unexpected error occurred.' };
     }
   };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { success, error: loginError } = await handleLogin(data);

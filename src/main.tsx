@@ -4,10 +4,10 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './pages/App';
-import HomePage from './pages/HomePage';
-import { SignUp } from './pages/SignUp';
-import { Login } from './pages/Login';
-import PageNotFound from './pages/PageNotFound';
+import HomePage from './pages/homepage/HomePage';
+import { SignUp } from './pages/signup/SignUp';
+import { Login } from './pages/login/Login';
+import PageNotFound from './pages/404 page/PageNotFound';
 
 const router = createBrowserRouter([
   { path: '*', element: <PageNotFound /> },
