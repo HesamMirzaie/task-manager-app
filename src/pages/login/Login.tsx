@@ -41,7 +41,7 @@ export function Login() {
     const { success, error: loginError } = await handleLogin(data);
     if (success) {
       alert('Login successful!');
-      navigate('/app');
+      navigate('/dashboard');
     } else {
       alert(`Login failed: ${loginError}`);
     }

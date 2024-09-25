@@ -1,0 +1,55 @@
+{
+  "users": [
+    {
+      "user_email": "ihe3am@gmail.com",
+      "user_name": "",
+      "user_image": ""
+    }
+  ],
+  "boards": [
+    {
+      "board_title": "Workout",
+      "board_description": "Target your gym plans\n",
+      "id": "3abaeadf-b34b-4024-adcb-617e7db28c6e"
+    },
+    {
+      "id": "ca8bd43c-4926-49ba-ad96-45de02148f7f",
+      "board_title": "New Board 2",
+      "board_description": "Description for New Board 2",
+      "board_users": [
+        "ihe3am@gmail.com"
+      ],
+      "columns": [
+        {
+          "id": 4,
+          "title": "Backlog",
+          "tasks": [
+            {
+              "id": 5,
+              "title": "Task 5",
+              "description": "This is task 5"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Review",
+          "tasks": []
+        },
+        {
+          "id": 6,
+          "title": "Completed",
+          "tasks": []
+        }
+      ]
+    },
+    {
+      "id": "fe0e9e57-ee8a-4f9d-9b1e-3f25ddbf493c",
+      "board_title": "Snapp",
+      "board_description": "Add Snapp tasks",
+      "board_users": [
+        "ihe3am@gmail.com"
+      ]
+    }
+  ]
+}
