@@ -16,7 +16,7 @@ const AddBoardButton: React.FC<AddBoardButtonProps> = ({ onAdd }) => {
     if (boardName.trim() !== '') {
       onAdd(boardName);
       setBoardName('');
-      setIsDialogOpen(false); // Close the dialog after adding the board
+      setIsDialogOpen(false);
     }
   };
 

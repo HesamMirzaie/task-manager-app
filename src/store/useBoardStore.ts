@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 import supabase from '../utils/supabase';
+import { toast } from './toastStore'; // Assuming toastStore manages the toast notifications
 
 interface Board {
   id: string;
-  border_name: string;
+  board_name: string; // Changed from border_name to board_name for consistency
   user_id: string;
   order: number;
 }
@@ -25,7 +26,7 @@ export const useBoardStore = create<BoardState>((set) => ({
     try {
       const { data, error } = await supabase
         .from('borders')
-        .select<Board[]>('*') // Type assertion for the response
+        .select<Board[]>('*')
         .order('order', { ascending: true });
 
       if (error) throw error;
@@ -34,6 +35,11 @@ export const useBoardStore = create<BoardState>((set) => ({
         boards: (data || []).filter((board) => board.user_id === userEmail),
       });
     } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Error fetching boards.',
+        variant: 'destructive',
+      });
       console.error('Error fetching boards:', error);
     }
   },
@@ -41,7 +47,6 @@ export const useBoardStore = create<BoardState>((set) => ({
   // Add a new board
   addBoard: async (boardName: string, userEmail: string) => {
     try {
-      // Fetch current number of boards to assign order
       const { data: allBoards, error: fetchError } = await supabase
         .from('borders')
         .select<Board[]>('*');
@@ -54,7 +59,7 @@ export const useBoardStore = create<BoardState>((set) => ({
         .from('borders')
         .insert<Board>([
           {
-            border_name: boardName,
+            board_name: boardName,
             user_id: userEmail,
             order: newOrder,
           },
@@ -64,7 +69,16 @@ export const useBoardStore = create<BoardState>((set) => ({
       if (error) throw error;
 
       set((state) => ({ boards: [...state.boards, ...(data || [])] }));
+      toast({
+        title: 'Board added',
+        description: `Successfully added ${boardName}.`,
+      });
     } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Error adding board.',
+        variant: 'destructive',
+      });
       console.error('Error adding board:', error);
     }
   },
@@ -74,7 +88,7 @@ export const useBoardStore = create<BoardState>((set) => ({
     try {
       const { data, error } = await supabase
         .from('borders')
-        .update({ border_name: newName })
+        .update({ board_name: newName })
         .eq('id', id)
         .select();
 
@@ -82,10 +96,19 @@ export const useBoardStore = create<BoardState>((set) => ({
 
       set((state) => ({
         boards: state.boards.map((board) =>
-          board.id === id ? { ...board, border_name: newName } : board
+          board.id === id ? { ...board, board_name: newName } : board
         ),
       }));
+      toast({
+        title: 'Board updated',
+        description: `Board name changed to ${newName}.`,
+      });
     } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Error updating board.',
+        variant: 'destructive',
+      });
       console.error('Error editing board:', error);
     }
   },
@@ -99,7 +122,16 @@ export const useBoardStore = create<BoardState>((set) => ({
       set((state) => ({
         boards: state.boards.filter((board) => board.id !== id),
       }));
+      toast({
+        title: 'Board deleted',
+        description: 'Board successfully deleted.',
+      });
     } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Error deleting board.',
+        variant: 'destructive',
+      });
       console.error('Error deleting board:', error);
     }
   },
@@ -117,7 +149,16 @@ export const useBoardStore = create<BoardState>((set) => ({
       const { error } = await supabase.from('borders').upsert(updates);
 
       if (error) throw error;
+      toast({
+        title: 'Boards reordered',
+        description: 'Boards successfully reordered.',
+      });
     } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Error updating board order.',
+        variant: 'destructive',
+      });
       console.error('Error updating board order:', error);
     }
   },
