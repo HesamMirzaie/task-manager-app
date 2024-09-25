@@ -3,53 +3,57 @@
     {
       "user_email": "ihe3am@gmail.com",
       "user_name": "",
-      "user_image": ""
+      "user_image": "",
+      "id": "543e"
     }
   ],
   "boards": [
     {
-      "board_title": "Workout",
-      "board_description": "Target your gym plans\n",
-      "id": "3abaeadf-b34b-4024-adcb-617e7db28c6e"
-    },
-    {
-      "id": "ca8bd43c-4926-49ba-ad96-45de02148f7f",
-      "board_title": "New Board 2",
-      "board_description": "Description for New Board 2",
-      "board_users": [
-        "ihe3am@gmail.com"
-      ],
-      "columns": [
-        {
-          "id": 4,
-          "title": "Backlog",
-          "tasks": [
-            {
-              "id": 5,
-              "title": "Task 5",
-              "description": "This is task 5"
-            }
-          ]
-        },
-        {
-          "id": 5,
-          "title": "Review",
-          "tasks": []
-        },
-        {
-          "id": 6,
-          "title": "Completed",
-          "tasks": []
-        }
-      ]
-    },
-    {
-      "id": "fe0e9e57-ee8a-4f9d-9b1e-3f25ddbf493c",
-      "board_title": "Snapp",
-      "board_description": "Add Snapp tasks",
+      "id": "a068042a-cd95-43f4-a07c-f65f58c6cfb6",
+      "board_title": "asdawd",
+      "board_description": "wdawdwad",
       "board_users": [
         "ihe3am@gmail.com"
       ]
+    },
+    {
+      "id": "bd74bc66-51bb-43a3-961f-5f172ead40d0",
+      "board_title": "asdad",
+      "board_description": "werfdf",
+      "board_users": [
+        "ihe3am@gmail.com"
+      ]
+    }
+  ],
+  "columns": [
+    {
+      "id": "99ceb1ad-e70f-4b2b-b5c3-7eb721e9ed04",
+      "title": "Workout",
+      "boardId": "a068042a-cd95-43f4-a07c-f65f58c6cfb6"
+    },
+    {
+      "id": "fe177124-189c-4c70-a1ed-f3206d0580f2",
+      "title": "qr3rwr",
+      "boardId": "bd74bc66-51bb-43a3-961f-5f172ead40d0"
+    },
+    {
+      "id": "8d0c2efa-0ce3-4214-8797-796fd51168fc",
+      "title": "asddad",
+      "boardId": "bd74bc66-51bb-43a3-961f-5f172ead40d0"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "3430f8d2-bf00-4dd6-b772-d8d07487f1c8",
+      "title": "Workout",
+      "description": "blah blah",
+      "columnId": "99ceb1ad-e70f-4b2b-b5c3-7eb721e9ed04"
+    },
+    {
+      "id": "5a8af96a-f36b-4663-a796-fddb4abbaa79",
+      "title": " nklnll",
+      "description": "th834ut",
+      "columnId": "8d0c2efa-0ce3-4214-8797-796fd51168fc"
     }
   ]
 }

@@ -83,14 +83,17 @@ export default function KanbanDashboard() {
 
     try {
       const updatedBoard = {
+        id: editBoard.id, // Retain the old ID
         board_title: editBoard.board_title,
         board_description: editBoard.board_description,
+        board_users: editBoard.board_users, // Retain the old users
       };
 
       const response = await axios.put<Board>(
         `http://localhost:5000/boards/${editBoard.id}`,
         updatedBoard
       );
+
       setBoards((prevBoards) =>
         prevBoards.map((board) =>
           board.id === editBoard.id ? response.data : board
@@ -187,12 +190,16 @@ export default function KanbanDashboard() {
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setEditBoard(board);
+                      setEditBoard({
+                        ...board,
+                        board_users: board.board_users,
+                      });
                     }}
                     className="text-gray-400 hover:text-white"
                   >
                     <Edit className="h-4 w-4" />
                   </Button>
+
                   <Button
                     variant="ghost"
                     size="sm"
