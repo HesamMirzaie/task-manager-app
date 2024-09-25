@@ -83,10 +83,10 @@ export default function KanbanDashboard() {
 
     try {
       const updatedBoard = {
-        id: editBoard.id, // Retain the old ID
+        id: editBoard.id,
         board_title: editBoard.board_title,
         board_description: editBoard.board_description,
-        board_users: editBoard.board_users, // Retain the old users
+        board_users: editBoard.board_users,
       };
 
       const response = await axios.put<Board>(
@@ -99,7 +99,7 @@ export default function KanbanDashboard() {
           board.id === editBoard.id ? response.data : board
         )
       );
-      setEditBoard(null);
+      setEditBoard(null); // Close the dialog after editing
     } catch (error) {
       console.error('Error updating board:', error);
     }
@@ -123,7 +123,7 @@ export default function KanbanDashboard() {
   }
 
   return (
-    <div className=" w-full p-4 bg-gray-900 text-white min-h-screen">
+    <div className="w-full p-4 bg-gray-900 text-white min-h-screen">
       <header className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Kanban Boards</h1>
         <Dialog>
@@ -190,10 +190,7 @@ export default function KanbanDashboard() {
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setEditBoard({
-                        ...board,
-                        board_users: board.board_users,
-                      });
+                      setEditBoard({ ...board });
                     }}
                     className="text-gray-400 hover:text-white"
                   >
