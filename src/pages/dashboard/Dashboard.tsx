@@ -24,6 +24,15 @@ import {
   CardHeader,
   CardTitle,
 } from '../../components/ui/card';
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+} from '../../components/ui/alert-dialog';
 
 interface Board {
   id: string;
@@ -38,6 +47,8 @@ export default function KanbanDashboard() {
   const [editBoard, setEditBoard] = useState<Board | null>(null);
   const [newBoardTitle, setNewBoardTitle] = useState<string>('');
   const [newBoardDescription, setNewBoardDescription] = useState<string>('');
+  const [deleteBoardId, setDeleteBoardId] = useState<string | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false); // New state for dialog
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -73,6 +84,7 @@ export default function KanbanDashboard() {
       setBoards((prevBoards) => [...prevBoards, response.data]);
       setNewBoardTitle('');
       setNewBoardDescription('');
+      setIsDialogOpen(false); // Close dialog after creating board
     } catch (error) {
       console.error('Error creating board:', error);
     }
@@ -109,6 +121,7 @@ export default function KanbanDashboard() {
     try {
       await axios.delete(`http://localhost:5000/boards/${id}`);
       setBoards((prevBoards) => prevBoards.filter((board) => board.id !== id));
+      setDeleteBoardId(null); // Close the alert dialog after deleting
     } catch (error) {
       console.error('Error deleting board:', error);
     }
@@ -126,9 +139,9 @@ export default function KanbanDashboard() {
     <div className="w-full p-4 bg-gray-900 text-white min-h-screen">
       <header className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Kanban Boards</h1>
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button variant="outline">
+            <Button variant="outline" onClick={() => setIsDialogOpen(true)}>
               <Plus className="mr-2 h-4 w-4" /> Create Board
             </Button>
           </DialogTrigger>
@@ -197,17 +210,44 @@ export default function KanbanDashboard() {
                     <Edit className="h-4 w-4" />
                   </Button>
 
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      deleteBoard(board.id);
-                    }}
-                    className="text-gray-400 hover:text-white"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setDeleteBoardId(board.id); // Set the board ID to delete
+                        }}
+                        className="text-gray-400 hover:text-white"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent className="bg-gray-800 text-white">
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Delete Board</AlertDialogTitle>
+                        <AlertDialogDescription className="text-gray-400">
+                          Are you sure you want to delete this board? This
+                          action cannot be undone.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <Button
+                          variant="outline"
+                          onClick={() => setDeleteBoardId(null)}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          onClick={() => deleteBoard(deleteBoardId!)}
+                          variant="destructive"
+                        >
+                          Delete
+                        </Button>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
               </CardFooter>
             </Card>
