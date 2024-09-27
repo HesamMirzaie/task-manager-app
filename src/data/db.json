@@ -34,13 +34,16 @@
     {
       "id": "2c1dbf10-8dc7-4ff8-977f-9ac38b4a3a1d",
       "title": "UI Team",
-      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
-    },
-    {
-      "id": "583d3d3d-1254-4a96-8ccb-84e6b8d210d1",
-      "title": "Digi Next",
-      "boardId": "8399fd6e-6903-4de7-8457-c4b2d378e8b5"
+      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea",
+      "tasks": []
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "id": "53514fe1-34f6-4276-8258-f2713774eb76",
+      "title": "dadw",
+      "description": "",
+      "columnId": "2c1dbf10-8dc7-4ff8-977f-9ac38b4a3a1d"
+    }
+  ]
 }
