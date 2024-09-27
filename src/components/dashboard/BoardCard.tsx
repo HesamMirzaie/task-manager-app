@@ -7,9 +7,9 @@ import {
 } from '../ui/card';
 
 // Components
-import { DeleteBoardButton } from './DeleteBoardButton';
-import { OpenBoardButton } from './OpenBoardButton';
-import { EditBoardButton } from './EditBoardButton';
+import { DeleteBoardButton } from './buttons/DeleteBoardButton';
+import { OpenBoardButton } from './buttons/OpenBoardButton';
+import { EditBoardButton } from './buttons/EditBoardButton';
 
 export const BoardCard = ({ board, setBoards }: any) => {
   return (

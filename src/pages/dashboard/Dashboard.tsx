@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Loading } from '../../components/Loading';
-import { CreateBoardButton } from '../../components/dashboard/CreateBoardButton';
+import { CreateBoardButton } from '../../components/dashboard/buttons/CreateBoardButton';
 import { BoardCard } from '../../components/dashboard/BoardCard';
 
 export interface Board {

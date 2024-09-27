@@ -1,4 +1,4 @@
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { useNavigate } from 'react-router-dom';
 
 export const OpenBoardButton = ({ board }: any) => {
