@@ -5,7 +5,7 @@ import { DeleteColumnButton } from './buttons/DeleteColumnButton';
 export const ColumnHeader = ({ column, columns, setColumns }: any) => {
   return (
     <>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b border-gray-700">
         <CardTitle className="text-lg font-semibold text-gray-100">
           {column.title}
         </CardTitle>

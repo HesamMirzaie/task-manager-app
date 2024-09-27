@@ -15,39 +15,27 @@
       "board_users": [
         "ihe3am@gmail.com"
       ]
+    },
+    {
+      "id": "8399fd6e-6903-4de7-8457-c4b2d378e8b5",
+      "board_title": "Tapsi",
+      "board_description": "Work in Tapsi Team",
+      "board_users": [
+        "ihe3am@gmail.com"
+      ]
     }
   ],
   "columns": [
     {
-      "id": "7a534ab5-7026-4610-933b-89099aeb6c93",
-      "title": "UI Team ",
-      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea",
-      "tasks": [
-        {
-          "id": "46c03bad-fb99-456a-826e-8331da5e6c3e",
-          "title": "Design a button for rent a car 1",
-          "description": "We need a modern button to connect users to drivers",
-          "columnId": "7a534ab5-7026-4610-933b-89099aeb6c93"
-        }
-      ]
-    },
-    {
-      "id": "2ec172b1-2011-4e73-a144-4564204a951e",
-      "title": "Backend Team",
-      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
-    },
-    {
       "id": "835cc3b9-49f7-4c78-b313-aaaa47e06db6",
       "title": "Front-end Team",
       "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
+    },
+    {
+      "id": "2c1dbf10-8dc7-4ff8-977f-9ac38b4a3a1d",
+      "title": "UI Team",
+      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
     }
   ],
-  "tasks": [
-    {
-      "id": "46c03bad-fb99-456a-826e-8331da5e6c3e",
-      "title": "Design a button for rent a car 2",
-      "description": "We need a modern button to connect users to drivers",
-      "columnId": "7a534ab5-7026-4610-933b-89099aeb6c93"
-    }
-  ]
+  "tasks": []
 }

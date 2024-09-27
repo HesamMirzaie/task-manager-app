@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   CardContent,
@@ -8,16 +9,17 @@ import {
 
 // Components
 import { DeleteBoardButton } from './buttons/DeleteBoardButton';
-import { OpenBoardButton } from './buttons/OpenBoardButton';
 import { EditBoardButton } from './buttons/EditBoardButton';
 
 export const BoardCard = ({ board, setBoards }: any) => {
+  const navigate = useNavigate();
+
   return (
     <>
-      {/*  */}
       <Card
         key={board.id}
-        className="bg-gray-800 border-gray-700 cursor-pointer hover:bg-gray-700 transition-colors"
+        className="bg-gray-800 border-gray-700 cursor-pointer hover:bg-gray-700 transition-all duration-300 ease-in-out hover:transform hover:scale-105 hover:shadow-lg"
+        onClick={() => navigate(`/dashboard/${board.id}`)}
       >
         {/*  */}
         <CardHeader>
@@ -28,12 +30,9 @@ export const BoardCard = ({ board, setBoards }: any) => {
           <p className="text-sm text-gray-400">{board.board_description}</p>
         </CardContent>
         {/*  */}
-        <CardFooter className="flex justify-between">
-          <OpenBoardButton board={board} />
-          <div>
-            <EditBoardButton setBoards={setBoards} board={board} />
-            <DeleteBoardButton setBoards={setBoards} board={board} />
-          </div>
+        <CardFooter className="flex justify-end">
+          <EditBoardButton setBoards={setBoards} board={board} />
+          <DeleteBoardButton setBoards={setBoards} board={board} />
         </CardFooter>
         {/*  */}
       </Card>

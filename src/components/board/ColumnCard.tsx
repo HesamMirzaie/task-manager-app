@@ -1,4 +1,4 @@
-import { Card, CardContent } from '../ui/card';
+import { Card, CardContent, CardFooter } from '../ui/card';
 import { ColumnHeader } from './ColumnHeader';
 import { TaskContainer } from './task/TaskContainer';
 import { AddTaskButton } from './buttons/AddTaskButton';

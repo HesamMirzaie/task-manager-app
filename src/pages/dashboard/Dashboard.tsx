@@ -49,12 +49,18 @@ export default function KanbanDashboard() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-8">
-          <p className="text-xl text-gray-400">
-            No boards available. Create your first board to get started!
-          </p>
-        </div>
+        <EmptyBoard />
       )}
+    </div>
+  );
+}
+
+function EmptyBoard() {
+  return (
+    <div className="text-center py-8">
+      <p className="text-xl text-gray-400">
+        No boards available. Create your first board to get started!
+      </p>
     </div>
   );
 }
