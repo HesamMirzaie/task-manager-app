@@ -1,7 +1,7 @@
 import { Card, CardContent } from '../ui/card';
 import { ColumnHeader } from './ColumnHeader';
 import { TaskContainer } from './task/TaskContainer';
-import { AddTaskButton } from './AddTaskButton';
+import { AddTaskButton } from './buttons/AddTaskButton';
 
 export const ColumnCard = ({ column, columns, setColumns }: any) => {
   return (

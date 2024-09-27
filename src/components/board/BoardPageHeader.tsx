@@ -1,4 +1,4 @@
-import { AddColumnButton } from './AddColumnButton';
+import { AddColumnButton } from './buttons/AddColumnButton';
 
 export const BoardPageHeader = ({ columns, setColumns, boardId }: any) => {
   return (
