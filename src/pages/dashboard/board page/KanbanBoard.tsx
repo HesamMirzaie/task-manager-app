@@ -67,16 +67,28 @@ export default function KanbanBoard() {
         setColumns={setColumns}
         boardId={boardId}
       />
-
-      <div className="flex gap-6 overflow-x-auto pb-6">
-        {columns.map((column) => (
-          <ColumnCard
-            column={column}
-            columns={columns}
-            setColumns={setColumns}
-          />
-        ))}
-      </div>
+      {columns.length > 0 ? (
+        <div className="flex gap-6 overflow-x-auto pb-6">
+          {columns.map((column) => (
+            <ColumnCard
+              column={column}
+              columns={columns}
+              setColumns={setColumns}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyColumn />
+      )}
+    </div>
+  );
+}
+function EmptyColumn() {
+  return (
+    <div className="text-center py-8">
+      <p className="text-xl text-gray-400">
+        No Column available. Create your first Column to get started!
+      </p>
     </div>
   );
 }

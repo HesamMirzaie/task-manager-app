@@ -36,7 +36,7 @@ export default function KanbanDashboard() {
   }
 
   return (
-    <div className="w-full p-4 bg-gray-900 text-white min-h-screen">
+    <div className="w-full p-6 bg-gray-900 text-white min-h-screen">
       <header className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Kanban Boards</h1>
         <CreateBoardButton setBoards={setBoards} />
