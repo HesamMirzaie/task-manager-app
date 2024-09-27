@@ -9,17 +9,9 @@
   ],
   "boards": [
     {
-      "id": "c7e44320-1ac2-48be-b270-18404863a753",
-      "board_title": "dawdaw",
-      "board_description": "dawdawd",
-      "board_users": [
-        "ihe3am@gmail.com"
-      ]
-    },
-    {
-      "id": "57c16d83-d2b2-4f3b-a374-8a59fb0d8034",
-      "board_title": "wdawd",
-      "board_description": "wdwadaw",
+      "id": "a88101d0-2499-47dd-b526-db7cac9ceeea",
+      "board_title": "Snapp",
+      "board_description": "Making board for Snapp Team",
       "board_users": [
         "ihe3am@gmail.com"
       ]
@@ -27,50 +19,27 @@
   ],
   "columns": [
     {
-      "id": "fe177124-189c-4c70-a1ed-f3206d0580f2",
-      "title": "qr3rwr",
-      "boardId": null
+      "id": "7a534ab5-7026-4610-933b-89099aeb6c93",
+      "title": "UI Team",
+      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
     },
     {
-      "id": "8d0c2efa-0ce3-4214-8797-796fd51168fc",
-      "title": "asddad",
-      "boardId": null
+      "id": "2ec172b1-2011-4e73-a144-4564204a951e",
+      "title": "Backend Team",
+      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
     },
     {
-      "id": "73db8be9-e59b-4d1f-bb49-5f0ea32f0fae",
-      "title": "adadawd",
-      "boardId": null
-    },
-    {
-      "id": "e307f7e8-2fae-44cc-a441-f503ca8279ec",
-      "title": "awdawdawdawd",
-      "boardId": null
+      "id": "835cc3b9-49f7-4c78-b313-aaaa47e06db6",
+      "title": "Front-end Team",
+      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
     }
   ],
   "tasks": [
     {
-      "id": "3430f8d2-bf00-4dd6-b772-d8d07487f1c8",
-      "title": "Workout",
-      "description": "blah blah",
-      "columnId": "99ceb1ad-e70f-4b2b-b5c3-7eb721e9ed04"
-    },
-    {
-      "id": "5a8af96a-f36b-4663-a796-fddb4abbaa79",
-      "title": " nklnll",
-      "description": "th834ut",
-      "columnId": "8d0c2efa-0ce3-4214-8797-796fd51168fc"
-    },
-    {
-      "id": "857634f6-7152-418b-9b1b-fa2fdc76ac9c",
-      "title": "wdawdawd",
-      "description": "awdawda",
-      "columnId": "fe177124-189c-4c70-a1ed-f3206d0580f2"
-    },
-    {
-      "id": "0d219a1b-b78a-499a-bc51-ee5a3ce62f47",
-      "title": "dwadawda",
-      "description": "dadwadaw",
-      "columnId": "e307f7e8-2fae-44cc-a441-f503ca8279ec"
+      "id": "46c03bad-fb99-456a-826e-8331da5e6c3e",
+      "title": "Design a button for rent a car",
+      "description": "We need a modern button to connect users to drivers",
+      "columnId": "7a534ab5-7026-4610-933b-89099aeb6c93"
     }
   ]
 }

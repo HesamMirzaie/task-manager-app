@@ -296,6 +296,7 @@ export default function KanbanBoard() {
               <ScrollArea className="h-64">
                 {column.tasks && column.tasks.length > 0 ? (
                   column.tasks.map((task) => (
+                    // Render Tasks
                     <div
                       key={task.id}
                       className="mb-4 p-3 bg-gray-700 rounded-lg"
@@ -358,7 +359,7 @@ export default function KanbanBoard() {
                   <p className="text-sm text-gray-400">No tasks available.</p>
                 )}
               </ScrollArea>
-
+              {/* Add new Task */}
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
