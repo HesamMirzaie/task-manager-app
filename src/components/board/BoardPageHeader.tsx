@@ -1,6 +1,6 @@
 import { AddColumnButton } from './AddColumnButton';
 
-export const BoardHeader = ({ columns, setColumns, boardId }: any) => {
+export const BoardPageHeader = ({ columns, setColumns, boardId }: any) => {
   return (
     <header className=" flex justify-between">
       <h1 className="text-3xl font-bold mb-6 text-gray-100">

@@ -40,17 +40,12 @@
       "id": "835cc3b9-49f7-4c78-b313-aaaa47e06db6",
       "title": "Front-end Team",
       "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
-    },
-    {
-      "id": "ee1ae6d3-d1ac-450a-b272-429baf329c0e",
-      "title": "Digikala",
-      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
     }
   ],
   "tasks": [
     {
       "id": "46c03bad-fb99-456a-826e-8331da5e6c3e",
-      "title": "Design a button for rent a car ",
+      "title": "Design a button for rent a car 1",
       "description": "We need a modern button to connect users to drivers",
       "columnId": "7a534ab5-7026-4610-933b-89099aeb6c93"
     }

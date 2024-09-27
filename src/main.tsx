@@ -6,7 +6,7 @@ import HomePage from './pages/homepage/HomePage';
 import { SignUp } from './pages/signup/SignUp';
 import { Login } from './pages/login/Login';
 import PageNotFound from './pages/404 page/PageNotFound';
-import KanbanBoard from './pages/dashboard/boardId/KanbanBoard';
+import KanbanBoard from './pages/dashboard/board page/KanbanBoard';
 import KanbanDashboard from './pages/dashboard/Dashboard';
 
 const router = createBrowserRouter([

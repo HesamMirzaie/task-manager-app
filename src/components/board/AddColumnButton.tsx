@@ -9,7 +9,7 @@ import {
 import { Button } from '../ui/button';
 import { Plus } from 'lucide-react';
 import { Input } from '../ui/input';
-import { Column } from '../../pages/dashboard/boardId/KanbanBoard';
+import { Column } from '../../pages/dashboard/board page/KanbanBoard';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 export const AddColumnButton = ({ setColumns, columns, boardId }: any) => {

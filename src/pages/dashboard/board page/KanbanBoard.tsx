@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { ColumnCard } from '../../../components/board/ColumnCard';
-import { BoardHeader } from '../../../components/board/BoardHeader';
+import { BoardPageHeader } from '../../../components/board/BoardPageHeader';
 
 export interface Task {
   id: string;
@@ -62,7 +62,7 @@ export default function KanbanBoard() {
 
   return (
     <div className="p-6 bg-gray-900 min-h-screen text-gray-100">
-      <BoardHeader
+      <BoardPageHeader
         columns={columns}
         setColumns={setColumns}
         boardId={boardId}
