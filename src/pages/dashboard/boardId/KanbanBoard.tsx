@@ -299,7 +299,7 @@ export default function KanbanBoard() {
                     // Render Tasks
                     <div
                       key={task.id}
-                      className="mb-4 p-3 bg-gray-700 rounded-lg"
+                      className="mb-4 p-3 bg-gray-700 rounded-xl"
                     >
                       <h3 className="text-sm font-medium text-gray-100">
                         {task.title}
@@ -307,7 +307,9 @@ export default function KanbanBoard() {
                       <p className="text-xs text-gray-400 mt-1">
                         {task.description}
                       </p>
+                      {/* Buttons */}
                       <div className="flex justify-end mt-2 gap-2">
+                        {/* Edit button */}
                         <Button
                           variant="ghost"
                           size="icon"
@@ -316,6 +318,7 @@ export default function KanbanBoard() {
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
+                        {/* Delete Button */}
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
                             <Button

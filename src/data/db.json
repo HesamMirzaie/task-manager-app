@@ -40,6 +40,12 @@
       "title": "Design a button for rent a car",
       "description": "We need a modern button to connect users to drivers",
       "columnId": "7a534ab5-7026-4610-933b-89099aeb6c93"
+    },
+    {
+      "id": "ba139e94-b7c3-43f4-8dec-c809f5a5aa58",
+      "title": "Design a landing page",
+      "description": "Design a landing page for new doctor app",
+      "columnId": "7a534ab5-7026-4610-933b-89099aeb6c93"
     }
   ]
 }
