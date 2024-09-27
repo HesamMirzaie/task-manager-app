@@ -1,40 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import { Loading } from '../../components/Loading';
+import { CreateBoardButton } from '../../components/CreateBoardButton';
+import { BoardCard } from '../../components/BoardCard';
 
-import { Plus, Edit, Trash2 } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../../components/ui/dialog';
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Textarea } from '../../components/ui/textarea';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '../../components/ui/card';
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-} from '../../components/ui/alert-dialog';
-
-interface Board {
+export interface Board {
   id: string;
   board_title: string;
   board_description: string;
@@ -44,13 +14,6 @@ interface Board {
 export default function KanbanDashboard() {
   const [boards, setBoards] = useState<Board[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [editBoard, setEditBoard] = useState<Board | null>(null);
-  const [newBoardTitle, setNewBoardTitle] = useState<string>('');
-  const [newBoardDescription, setNewBoardDescription] = useState<string>('');
-  const [deleteBoardId, setDeleteBoardId] = useState<string | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false); // New state for dialog
-  const navigate = useNavigate();
-  const { user } = useAuth();
 
   useEffect(() => {
     const fetchBoards = async (): Promise<void> => {
@@ -68,189 +31,21 @@ export default function KanbanDashboard() {
     fetchBoards();
   }, []);
 
-  const createBoard = async (): Promise<void> => {
-    try {
-      const newBoard: Board = {
-        id: uuidv4(),
-        board_title: newBoardTitle,
-        board_description: newBoardDescription,
-        board_users: [user.email],
-      };
-
-      const response = await axios.post<Board>(
-        'http://localhost:5000/boards',
-        newBoard
-      );
-      setBoards((prevBoards) => [...prevBoards, response.data]);
-      setNewBoardTitle('');
-      setNewBoardDescription('');
-      setIsDialogOpen(false); // Close dialog after creating board
-    } catch (error) {
-      console.error('Error creating board:', error);
-    }
-  };
-
-  const updateBoard = async (): Promise<void> => {
-    if (!editBoard) return;
-
-    try {
-      const updatedBoard = {
-        id: editBoard.id,
-        board_title: editBoard.board_title,
-        board_description: editBoard.board_description,
-        board_users: editBoard.board_users,
-      };
-
-      const response = await axios.put<Board>(
-        `http://localhost:5000/boards/${editBoard.id}`,
-        updatedBoard
-      );
-
-      setBoards((prevBoards) =>
-        prevBoards.map((board) =>
-          board.id === editBoard.id ? response.data : board
-        )
-      );
-      setEditBoard(null); // Close the dialog after editing
-    } catch (error) {
-      console.error('Error updating board:', error);
-    }
-  };
-
-  const deleteBoard = async (id: string): Promise<void> => {
-    try {
-      await axios.delete(`http://localhost:5000/boards/${id}`);
-      setBoards((prevBoards) => prevBoards.filter((board) => board.id !== id));
-      setDeleteBoardId(null); // Close the alert dialog after deleting
-    } catch (error) {
-      console.error('Error deleting board:', error);
-    }
-  };
-
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen text-white">
-        Loading...
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
     <div className="w-full p-4 bg-gray-900 text-white min-h-screen">
       <header className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Kanban Boards</h1>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button variant="outline" onClick={() => setIsDialogOpen(true)}>
-              <Plus className="mr-2 h-4 w-4" /> Create Board
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="bg-gray-800 text-white">
-            <DialogHeader>
-              <DialogTitle>Create a new board</DialogTitle>
-              <DialogDescription className="text-gray-400">
-                Add a title and description for your new Kanban board.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <Input
-                placeholder="Board Title"
-                value={newBoardTitle}
-                onChange={(e) => setNewBoardTitle(e.target.value)}
-                className="bg-gray-700 text-white border-gray-600"
-              />
-              <Textarea
-                placeholder="Board Description"
-                value={newBoardDescription}
-                onChange={(e) => setNewBoardDescription(e.target.value)}
-                className="bg-gray-700 text-white border-gray-600"
-              />
-            </div>
-            <DialogFooter>
-              <Button onClick={createBoard}>Create Board</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <CreateBoardButton setBoards={setBoards} />
       </header>
 
       {boards.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {boards.map((board) => (
-            <Card
-              key={board.id}
-              className="bg-gray-800 border-gray-700 cursor-pointer hover:bg-gray-700 transition-colors"
-            >
-              <CardHeader>
-                <CardTitle>{board.board_title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-400">
-                  {board.board_description}
-                </p>
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate(`/dashboard/${board.id}`)}
-                  className="text-white hover:bg-gray-700"
-                >
-                  Open Board
-                </Button>
-                <div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setEditBoard({ ...board });
-                    }}
-                    className="text-gray-400 hover:text-white"
-                  >
-                    <Edit className="h-4 w-4" />
-                  </Button>
-
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setDeleteBoardId(board.id); // Set the board ID to delete
-                        }}
-                        className="text-gray-400 hover:text-white"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent className="bg-gray-800 text-white">
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>Delete Board</AlertDialogTitle>
-                        <AlertDialogDescription className="text-gray-400">
-                          Are you sure you want to delete this board? This
-                          action cannot be undone.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <Button
-                          variant="outline"
-                          onClick={() => setDeleteBoardId(null)}
-                        >
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={() => deleteBoard(deleteBoardId!)}
-                          variant="destructive"
-                        >
-                          Delete
-                        </Button>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                </div>
-              </CardFooter>
-            </Card>
+            <BoardCard board={board} setBoards={setBoards} />
           ))}
         </div>
       ) : (
@@ -259,43 +54,6 @@ export default function KanbanDashboard() {
             No boards available. Create your first board to get started!
           </p>
         </div>
-      )}
-
-      {editBoard && (
-        <Dialog open={!!editBoard} onOpenChange={() => setEditBoard(null)}>
-          <DialogContent className="bg-gray-800 text-white">
-            <DialogHeader>
-              <DialogTitle>Edit Board</DialogTitle>
-              <DialogDescription className="text-gray-400">
-                Update the title and description of your Kanban board.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <Input
-                placeholder="Board Title"
-                value={editBoard.board_title}
-                onChange={(e) =>
-                  setEditBoard({ ...editBoard, board_title: e.target.value })
-                }
-                className="bg-gray-700 text-white border-gray-600"
-              />
-              <Textarea
-                placeholder="Board Description"
-                value={editBoard.board_description}
-                onChange={(e) =>
-                  setEditBoard({
-                    ...editBoard,
-                    board_description: e.target.value,
-                  })
-                }
-                className="bg-gray-700 text-white border-gray-600"
-              />
-            </div>
-            <DialogFooter>
-              <Button onClick={updateBoard}>Update Board</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
       )}
     </div>
   );
