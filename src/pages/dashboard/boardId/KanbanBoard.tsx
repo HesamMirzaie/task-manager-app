@@ -231,9 +231,36 @@ export default function KanbanBoard() {
 
   return (
     <div className="p-6 bg-gray-900 min-h-screen text-gray-100">
-      <h1 className="text-3xl font-bold mb-6 text-gray-100">
-        Modern Dark Kanban Board
-      </h1>
+      <header className=" flex justify-between">
+        <h1 className="text-3xl font-bold mb-6 text-gray-100">
+          Modern Dark Kanban Board
+        </h1>
+        {/* Add Column Button in top-right */}
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline" className="flex items-center">
+              <Plus className="mr-2 h-4 w-4" />
+              Add Column
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="bg-gray-900 text-gray-100">
+            <DialogHeader>
+              <DialogTitle>Add New Column</DialogTitle>
+            </DialogHeader>
+            <div className="mt-4">
+              <Input
+                value={newColumnTitle}
+                onChange={(e) => setNewColumnTitle(e.target.value)}
+                placeholder="Column Title"
+                className="mb-4"
+              />
+              <Button variant="default" onClick={addColumn}>
+                Add Column
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </header>
 
       <div className="flex gap-6 overflow-x-auto pb-6">
         {columns.map((column) => (
@@ -399,22 +426,6 @@ export default function KanbanBoard() {
             </CardContent>
           </Card>
         ))}
-
-        {/* Add new column */}
-        <div className="w-80 bg-gray-800 border-gray-700 p-4 rounded-lg">
-          <h2 className="text-lg font-semibold text-gray-100 mb-4">
-            Add New Column
-          </h2>
-          <Input
-            value={newColumnTitle}
-            onChange={(e) => setNewColumnTitle(e.target.value)}
-            placeholder="Column Title"
-            className="mb-4"
-          />
-          <Button variant="default" onClick={addColumn}>
-            Add Column
-          </Button>
-        </div>
       </div>
 
       {/* Edit Column Dialog */}
