@@ -20,8 +20,16 @@
   "columns": [
     {
       "id": "7a534ab5-7026-4610-933b-89099aeb6c93",
-      "title": "UI Team",
-      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
+      "title": "UI Team ",
+      "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea",
+      "tasks": [
+        {
+          "id": "46c03bad-fb99-456a-826e-8331da5e6c3e",
+          "title": "Design a button for rent a car ",
+          "description": "We need a modern button to connect users to drivers",
+          "columnId": "7a534ab5-7026-4610-933b-89099aeb6c93"
+        }
+      ]
     },
     {
       "id": "2ec172b1-2011-4e73-a144-4564204a951e",
@@ -34,7 +42,7 @@
       "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
     },
     {
-      "id": "e3d4eb33-32ee-4680-a2a2-03cfd8e86070",
+      "id": "ee1ae6d3-d1ac-450a-b272-429baf329c0e",
       "title": "Digikala",
       "boardId": "a88101d0-2499-47dd-b526-db7cac9ceeea"
     }
@@ -42,14 +50,8 @@
   "tasks": [
     {
       "id": "46c03bad-fb99-456a-826e-8331da5e6c3e",
-      "title": "Design a button for rent a car",
+      "title": "Design a button for rent a car ",
       "description": "We need a modern button to connect users to drivers",
-      "columnId": "7a534ab5-7026-4610-933b-89099aeb6c93"
-    },
-    {
-      "id": "ba139e94-b7c3-43f4-8dec-c809f5a5aa58",
-      "title": "Design a landing page",
-      "description": "Design a landing page for new doctor app",
       "columnId": "7a534ab5-7026-4610-933b-89099aeb6c93"
     }
   ]
