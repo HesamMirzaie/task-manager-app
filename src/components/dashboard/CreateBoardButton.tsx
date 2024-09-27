@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,12 +8,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from './ui/dialog';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
+} from '../ui/dialog';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
 import { useState } from 'react';
-import useAuth from '../hooks/useAuth';
-import { Board } from '../pages/dashboard/Dashboard';
+import useAuth from '../../hooks/useAuth';
+import { Board } from '../../pages/dashboard/Dashboard';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 

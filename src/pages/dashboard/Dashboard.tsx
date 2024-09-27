@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Loading } from '../../components/Loading';
-import { CreateBoardButton } from '../../components/CreateBoardButton';
-import { BoardCard } from '../../components/BoardCard';
+import { CreateBoardButton } from '../../components/dashboard/CreateBoardButton';
+import { BoardCard } from '../../components/dashboard/BoardCard';
 
 export interface Board {
   id: string;

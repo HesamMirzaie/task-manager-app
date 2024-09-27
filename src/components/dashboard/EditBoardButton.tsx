@@ -1,5 +1,5 @@
 import { Edit } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import {
   Dialog,
   DialogContent,
@@ -7,11 +7,11 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from './ui/dialog';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
+} from '../ui/dialog';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
 import { useState } from 'react';
-import { Board } from '../pages/dashboard/Dashboard';
+import { Board } from '../../pages/dashboard/Dashboard';
 import axios from 'axios';
 
 export const EditBoardButton = ({ board, setBoards }: any) => {
