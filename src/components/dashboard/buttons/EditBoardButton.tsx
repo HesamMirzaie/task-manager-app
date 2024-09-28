@@ -13,36 +13,39 @@ import { Textarea } from '../../ui/textarea';
 import { useState } from 'react';
 import { Board } from '../../../pages/dashboard/Dashboard';
 import axios from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const EditBoardButton = ({ board, setBoards }: any) => {
+export const EditBoardButton = ({ board }: any) => {
   const [editBoard, setEditBoard] = useState<Board | null>(null);
+  const queryClient = useQueryClient();
 
-  const updateBoard = async (): Promise<void> => {
-    if (!editBoard) return;
-
-    try {
+  const updateBoardMutation = useMutation({
+    mutationFn: async () => {
       const updatedBoard = {
-        id: editBoard.id,
-        board_title: editBoard.board_title,
-        board_description: editBoard.board_description,
-        board_users: editBoard.board_users,
+        id: editBoard?.id,
+        board_title: editBoard?.board_title,
+        board_description: editBoard?.board_description,
+        board_users: editBoard?.board_users,
       };
 
-      const response = await axios.put<Board>(
-        `http://localhost:5000/boards/${editBoard.id}`,
+      await axios.put(
+        `http://localhost:5000/boards/${editBoard?.id}`,
         updatedBoard
       );
-
-      setBoards((prevBoards: any) =>
-        prevBoards.map((board: any) =>
-          board.id === editBoard.id ? response.data : board
-        )
-      );
-      setEditBoard(null); // Close the dialog after editing
-    } catch (error) {
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['boards']); // تازه‌سازی کوئری boards پس از ویرایش
+      setEditBoard(null); // بستن دیالوگ
+    },
+    onError: (error) => {
       console.error('Error updating board:', error);
-    }
+    },
+  });
+
+  const handleUpdateBoard = () => {
+    updateBoardMutation.mutate();
   };
+
   return (
     <>
       <Button
@@ -56,6 +59,7 @@ export const EditBoardButton = ({ board, setBoards }: any) => {
       >
         <Edit className="h-4 w-4" />
       </Button>
+
       {editBoard && (
         <Dialog open={!!editBoard} onOpenChange={() => setEditBoard(null)}>
           <DialogContent
@@ -111,7 +115,7 @@ export const EditBoardButton = ({ board, setBoards }: any) => {
             </div>
             <DialogFooter>
               <Button
-                onClick={updateBoard}
+                onClick={handleUpdateBoard}
                 className="bg-indigo-600 text-white hover:bg-indigo-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg"
               >
                 Update Board

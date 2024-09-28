@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Loading } from '../../components/Loading';
 import { CreateBoardButton } from '../../components/dashboard/buttons/CreateBoardButton';
@@ -12,40 +12,40 @@ export interface Board {
 }
 
 export default function KanbanDashboard() {
-  const [boards, setBoards] = useState<Board[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const fetchBoards = async (): Promise<Board[]> => {
+    const response = await axios.get<Board[]>('http://localhost:5000/boards');
+    return response.data;
+  };
 
-  useEffect(() => {
-    const fetchBoards = async (): Promise<void> => {
-      try {
-        const response = await axios.get<Board[]>(
-          'http://localhost:5000/boards'
-        );
-        setBoards(response.data);
-      } catch (err) {
-        console.error('Error fetching boards:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchBoards();
-  }, []);
+  const {
+    data: boards,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['boards'],
+    queryFn: fetchBoards,
+  });
+  console.log(boards);
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
+  }
+
+  if (isError) {
+    return <p className="text-red-500">Error fetching boards.</p>;
   }
 
   return (
     <div className="w-full p-6 bg-gray-900 text-white min-h-screen">
       <header className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Kanban Boards</h1>
-        <CreateBoardButton setBoards={setBoards} />
+        <CreateBoardButton />
       </header>
 
       {boards.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {boards.map((board) => (
-            <BoardCard board={board} setBoards={setBoards} />
+          {boards?.map((board) => (
+            <BoardCard key={board.id} board={board} />
           ))}
         </div>
       ) : (

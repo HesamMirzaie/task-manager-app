@@ -13,21 +13,29 @@ import {
 import { Button } from '../../ui/button';
 import { useState } from 'react';
 import axios from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const DeleteBoardButton = ({ board, setBoards }: any) => {
+export const DeleteBoardButton = ({ board }: any) => {
   const [deleteBoardId, setDeleteBoardId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const deleteBoard = async (id: string): Promise<void> => {
-    try {
-      await axios.delete(`http://localhost:5000/boards/${id}`);
-      setBoards((prevBoards: any) =>
-        prevBoards.filter((board: any) => board.id !== id)
-      );
-      setDeleteBoardId(null); // Close the alert dialog after deleting
-    } catch (error) {
+  const deleteBoardMutation = useMutation({
+    mutationFn: async () => {
+      await axios.delete(`http://localhost:5000/boards/${deleteBoardId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['boards']); // تازه‌سازی کوئری boards پس از حذف
+      setDeleteBoardId(null); // بستن دیالوگ
+    },
+    onError: (error) => {
       console.error('Error deleting board:', error);
-    }
+    },
+  });
+
+  const handleDeleteBoard = () => {
+    deleteBoardMutation.mutate();
   };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -68,7 +76,7 @@ export const DeleteBoardButton = ({ board, setBoards }: any) => {
           </AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button
-              onClick={() => deleteBoardId && deleteBoard(deleteBoardId)}
+              onClick={handleDeleteBoard}
               className="bg-red-600 text-white hover:bg-red-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg"
             >
               Delete

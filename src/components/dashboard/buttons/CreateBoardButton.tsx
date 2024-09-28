@@ -16,34 +16,45 @@ import useAuth from '../../../hooks/useAuth';
 import { Board } from '../../../pages/dashboard/Dashboard';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const CreateBoardButton = ({ setBoards }: any) => {
+export const CreateBoardButton = () => {
   const [newBoardTitle, setNewBoardTitle] = useState<string>('');
   const [newBoardDescription, setNewBoardDescription] = useState<string>('');
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false); // New state for dialog
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const { user } = useAuth();
+  const queryClient = useQueryClient();
 
-  const createBoard = async (): Promise<void> => {
-    try {
-      const newBoard: Board = {
-        id: uuidv4(),
-        board_title: newBoardTitle,
-        board_description: newBoardDescription,
-        board_users: [user.email],
-      };
-
+  const createBoardMutation = useMutation({
+    mutationFn: async (newBoard: Board) => {
       const response = await axios.post<Board>(
         'http://localhost:5000/boards',
         newBoard
       );
-
-      setBoards((prevBoards: any) => [...prevBoards, response.data]);
+      return response.data;
+    },
+    onSuccess: () => {
+      // کوئری boards را invalidate می‌کنیم تا لیست بردها به‌روز شود
+      queryClient.invalidateQueries(['boards']);
       setNewBoardTitle('');
       setNewBoardDescription('');
-      setIsDialogOpen(false); // Close dialog after creating board
-    } catch (error) {
+      setIsDialogOpen(false);
+    },
+    onError: (error) => {
       console.error('Error creating board:', error);
-    }
+    },
+  });
+
+  const handleCreateBoard = () => {
+    const newBoard: Board = {
+      id: uuidv4(),
+      board_title: newBoardTitle,
+      board_description: newBoardDescription,
+      board_users: [user.email],
+    };
+
+    // ایجاد برد جدید
+    createBoardMutation.mutate(newBoard);
   };
 
   return (
@@ -100,7 +111,7 @@ export const CreateBoardButton = ({ setBoards }: any) => {
         </div>
         <DialogFooter>
           <Button
-            onClick={createBoard}
+            onClick={handleCreateBoard}
             className="bg-indigo-600 text-white hover:bg-indigo-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg"
           >
             Create Board
