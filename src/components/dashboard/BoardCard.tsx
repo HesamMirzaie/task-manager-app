@@ -25,9 +25,12 @@ export const BoardCard = ({ board }: any) => {
         <CardContent>
           <p className="text-sm text-gray-400">{board.board_description}</p>
         </CardContent>
-        <CardFooter className="flex justify-end">
-          <EditBoardButton board={board} />
-          <DeleteBoardButton board={board} />
+        <CardFooter className="flex justify-between">
+          <p>Users</p>
+          <div>
+            <EditBoardButton board={board} />
+            <DeleteBoardButton board={board} />
+          </div>
         </CardFooter>
       </Card>
     </>

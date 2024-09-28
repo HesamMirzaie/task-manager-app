@@ -34,20 +34,17 @@ export const EditBoardButton = ({ board }: any) => {
       );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['boards']); // تازه‌سازی کوئری boards پس از ویرایش
-      setEditBoard(null); // بستن دیالوگ
+      queryClient.invalidateQueries(['boards']);
+      setEditBoard(null);
     },
     onError: (error) => {
       console.error('Error updating board:', error);
     },
   });
 
-  const handleUpdateBoard = () => {
-    updateBoardMutation.mutate();
-  };
-
   return (
     <>
+      {/* Trigger */}
       <Button
         variant="ghost"
         size="sm"
@@ -59,7 +56,7 @@ export const EditBoardButton = ({ board }: any) => {
       >
         <Edit className="h-4 w-4" />
       </Button>
-
+      {/* Edit Dialog */}
       {editBoard && (
         <Dialog open={!!editBoard} onOpenChange={() => setEditBoard(null)}>
           <DialogContent
@@ -115,7 +112,7 @@ export const EditBoardButton = ({ board }: any) => {
             </div>
             <DialogFooter>
               <Button
-                onClick={handleUpdateBoard}
+                onClick={() => updateBoardMutation.mutate()}
                 className="bg-indigo-600 text-white hover:bg-indigo-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg"
               >
                 Update Board

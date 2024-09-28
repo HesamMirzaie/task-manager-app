@@ -32,10 +32,6 @@ export const DeleteBoardButton = ({ board }: any) => {
     },
   });
 
-  const handleDeleteBoard = () => {
-    deleteBoardMutation.mutate();
-  };
-
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -76,7 +72,7 @@ export const DeleteBoardButton = ({ board }: any) => {
           </AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button
-              onClick={handleDeleteBoard}
+              onClick={() => deleteBoardMutation.mutate()}
               className="bg-red-600 text-white hover:bg-red-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg"
             >
               Delete
