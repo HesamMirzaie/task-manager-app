@@ -15,51 +15,51 @@ import { Column, Task } from '../../../pages/dashboard/board page/KanbanBoard';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { Plus } from 'lucide-react';
-export const AddTaskButton = ({ column, columns, setColumns }: any) => {
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+export const AddTaskButton = ({ column }: { column: Column }) => {
+  const queryClient = useQueryClient();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDescription, setNewTaskDescription] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const addTask = async () => {
+  // Mutation to add a new task
+  const addTaskMutation = useMutation(
+    async (newTask: Task) => {
+      const response = await axios.post<Task>(
+        `http://localhost:5000/tasks`,
+        newTask
+      );
+      return response.data; // Return the added task
+    },
+    {
+      onSuccess: () => {
+        // Invalidate the tasks query to refetch data
+        queryClient.invalidateQueries(['tasks']);
+        setNewTaskTitle(''); // Reset fields
+        setNewTaskDescription('');
+        setIsDialogOpen(false);
+      },
+      onError: (error) => {
+        console.error('Error adding task:', error);
+        setError('Failed to add task. Please try again.');
+      },
+    }
+  );
+
+  const addTask = () => {
     if (newTaskTitle.trim()) {
-      setIsLoading(true);
-      setError(null);
       const newTask: Task = {
         id: uuidv4(),
         title: newTaskTitle,
         description: newTaskDescription,
+        columnId: column.id,
       };
-
-      try {
-        const response = await axios.post<Task>(`http://localhost:5000/tasks`, {
-          ...newTask,
-          columnId: column.id,
-        });
-
-        const updatedColumns = columns.map((col: Column) => {
-          if (col.id === column.id) {
-            return {
-              ...col,
-              tasks: [...(col.tasks || []), response.data],
-            };
-          }
-          return col;
-        });
-
-        setColumns(updatedColumns);
-        setNewTaskTitle('');
-        setNewTaskDescription('');
-        setIsDialogOpen(false);
-      } catch (error) {
-        console.error('Error adding task:', error);
-        setError('Failed to add task. Please try again.');
-      } finally {
-        setIsLoading(false);
-      }
+      addTaskMutation.mutate(newTask);
     }
   };
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
@@ -121,10 +121,10 @@ export const AddTaskButton = ({ column, columns, setColumns }: any) => {
         <DialogFooter className="mt-6">
           <Button
             onClick={addTask}
-            disabled={isLoading || !newTaskTitle.trim()}
+            disabled={addTaskMutation.isLoading || !newTaskTitle.trim()}
             className="bg-indigo-600 text-white hover:bg-indigo-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg w-full disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Adding Task...' : 'Add Task'}
+            {addTaskMutation.isLoading ? 'Adding Task...' : 'Add Task'}
           </Button>
         </DialogFooter>
       </DialogContent>

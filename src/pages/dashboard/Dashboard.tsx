@@ -25,7 +25,6 @@ export default function KanbanDashboard() {
     queryKey: ['boards'],
     queryFn: fetchBoards,
   });
-  console.log(boards);
 
   if (isLoading) {
     return <Loading />;
@@ -43,9 +42,11 @@ export default function KanbanDashboard() {
       </header>
 
       {boards.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="flex overflow-x-auto overflow-y-hidden space-x-4 pb-4">
           {boards?.map((board) => (
-            <BoardCard key={board.id} board={board} />
+            <div className="flex-shrink-0" key={board.id}>
+              <BoardCard board={board} />
+            </div>
           ))}
         </div>
       ) : (

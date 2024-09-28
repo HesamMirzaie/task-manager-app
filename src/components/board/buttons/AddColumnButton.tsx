@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -14,32 +14,57 @@ import { Input } from '../../ui/input';
 import { Column } from '../../../pages/dashboard/board page/KanbanBoard';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
-export const AddColumnButton = ({ setColumns, columns, boardId }: any) => {
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+export const AddColumnButton = ({
+  boardId,
+}: {
+  columns: Column[];
+  boardId: string;
+}) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
 
-  // Add new column
-  const addColumn = async () => {
+  const queryClient = useQueryClient();
+
+  // Mutation to add a new column
+  const addColumnMutation = useMutation(
+    async (newColumn: Column) => {
+      const response = await axios.post<Column>(
+        `http://localhost:5000/columns`,
+        newColumn
+      );
+      return response.data;
+    },
+    {
+      onSuccess: (data) => {
+        // Update the columns cache after successful mutation
+        queryClient.setQueryData(
+          ['columns', boardId],
+          (oldColumns: Column[] | undefined) => {
+            return oldColumns ? [...oldColumns, data] : [data];
+          }
+        );
+        setNewColumnTitle('');
+        setIsDialogOpen(false); // Close dialog after creating the column
+      },
+      onError: (error) => {
+        console.error('Error adding column:', error);
+      },
+    }
+  );
+
+  const addColumn = () => {
     if (newColumnTitle.trim()) {
       const newColumn: Column = {
         id: uuidv4(),
         title: newColumnTitle,
         boardId: boardId,
       };
-
-      try {
-        const response = await axios.post<Column>(
-          `http://localhost:5000/columns`,
-          newColumn
-        );
-        setColumns([...columns, response.data]);
-        setNewColumnTitle('');
-        setIsDialogOpen(false); // Close dialog after creating board
-      } catch (error) {
-        console.error('Error adding column:', error);
-      }
+      addColumnMutation.mutate(newColumn);
     }
   };
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>

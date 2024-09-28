@@ -12,40 +12,62 @@ import { Input } from '../../ui/input';
 import { useState } from 'react';
 import { Column } from '../../../pages/dashboard/board page/KanbanBoard';
 import axios from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const EditColumnButton = ({ column, columns, setColumns }: any) => {
+export const EditColumnButton = ({ column }: { column: Column }) => {
   const [editingColumn, setEditingColumn] = useState<Column | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
 
-  // Edit column title
-  const editColumnTitle = async () => {
+  // Mutation to edit the column title
+  const editColumnMutation = useMutation(
+    async (updatedColumn: Column) => {
+      const response = await axios.put<Column>(
+        `http://localhost:5000/columns/${updatedColumn.id}`,
+        updatedColumn
+      );
+      return response.data;
+    },
+    {
+      onSuccess: (data) => {
+        // Update the cache with the new column data
+        queryClient.setQueryData(
+          ['columns', column.boardId],
+          (oldColumns: Column[] | undefined) => {
+            return oldColumns
+              ? oldColumns.map((col) => (col.id === data.id ? data : col))
+              : [];
+          }
+        );
+        setEditingColumn(null);
+      },
+      onError: (error) => {
+        console.error('Error updating column:', error);
+      },
+      onSettled: () => {
+        setIsLoading(false);
+      },
+    }
+  );
+
+  const handleEditClick = () => {
+    setEditingColumn(column);
+  };
+
+  const handleSaveChanges = () => {
     if (editingColumn && editingColumn.title.trim()) {
       setIsLoading(true);
-      try {
-        const response = await axios.put<Column>(
-          `http://localhost:5000/columns/${editingColumn.id}`,
-          editingColumn
-        );
-
-        const updatedColumns = columns.map((col: Column) =>
-          col.id === editingColumn.id ? response.data : col
-        );
-        setColumns(updatedColumns);
-        setEditingColumn(null);
-      } catch (error) {
-        console.error('Error updating column:', error);
-      } finally {
-        setIsLoading(false);
-      }
+      editColumnMutation.mutate(editingColumn);
     }
   };
+
   return (
     <>
       <Button
         variant="ghost"
         size="sm"
         className="text-gray-400 hover:text-indigo-400 transition-colors duration-200"
-        onClick={() => setEditingColumn(column)}
+        onClick={handleEditClick}
       >
         <Edit className="h-4 w-4" />
       </Button>
@@ -88,8 +110,8 @@ export const EditColumnButton = ({ column, columns, setColumns }: any) => {
           )}
           <DialogFooter className="mt-6">
             <Button
-              onClick={editColumnTitle}
-              disabled={isLoading}
+              onClick={handleSaveChanges}
+              disabled={isLoading || !editingColumn}
               className="bg-indigo-600 text-white hover:bg-indigo-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg w-full disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'Saving...' : 'Save Changes'}

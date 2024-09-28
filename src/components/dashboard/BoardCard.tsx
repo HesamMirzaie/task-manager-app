@@ -16,7 +16,7 @@ export const BoardCard = ({ board }: any) => {
     <>
       <Card
         key={board.id}
-        className="bg-gray-800 border-gray-700 cursor-pointer hover:bg-gray-700 transition-all duration-300 ease-in-out hover:transform hover:scale-105 hover:shadow-lg"
+        className="flex flex-col justify-between w-[24rem] h-[10rem] bg-gray-800 border-gray-700 cursor-pointer hover:bg-gray-700 transition-all duration-300 ease-in-out hover:shadow-lg"
         onClick={() => navigate(`/dashboard/${board.id}`)}
       >
         <CardHeader>
