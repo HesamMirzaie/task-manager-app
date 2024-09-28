@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, CheckCircle, Zap, Expand } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '../../components/ui/button';
 
 export default function LandingPage() {
   const [isScrolling, setIsScrolling] = useState(false);
@@ -39,12 +40,12 @@ export default function LandingPage() {
             <a href="#" className="text-2xl font-bold text-white">
               Task manager
             </a>
-            <button
+            <Button
               onClick={() => navigate('/login')}
               className="text-white border-white hover:bg-white hover:text-gray-900"
             >
               Login
-            </button>
+            </Button>
           </div>
         </div>
       </nav>

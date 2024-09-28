@@ -71,6 +71,7 @@ export default function KanbanBoard() {
         <div className="flex gap-6 overflow-x-auto pb-6">
           {columns.map((column) => (
             <ColumnCard
+              key={column.id}
               column={column}
               columns={columns}
               setColumns={setColumns}
