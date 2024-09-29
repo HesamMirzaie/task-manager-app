@@ -14,11 +14,7 @@ const fetchTasks = async (columnId: string) => {
 };
 
 export const ColumnCard = ({ column }: any) => {
-  const {
-    data: tasks,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: tasks, isLoading } = useQuery({
     queryKey: ['tasks', column.id],
     queryFn: () => fetchTasks(column.id),
   });
@@ -33,12 +29,8 @@ export const ColumnCard = ({ column }: any) => {
       <CardContent className="pt-4">
         {isLoading ? (
           <p className="text-gray-400">Loading tasks...</p>
-        ) : isError ? (
-          <p className="text-red-500">Error fetching tasks.</p>
-        ) : tasks && tasks.length > 0 ? (
-          <TaskContainer tasks={tasks} />
         ) : (
-          <p className="text-gray-400">No tasks available.</p>
+          tasks && <TaskContainer tasks={tasks} />
         )}
 
         {/* Add new Task */}

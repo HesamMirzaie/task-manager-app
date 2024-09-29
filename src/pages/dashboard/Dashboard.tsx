@@ -35,14 +35,14 @@ export default function KanbanDashboard() {
   }
 
   return (
-    <div className="w-full p-6 bg-gray-900 text-white min-h-screen">
-      <header className="flex justify-between items-center mb-8">
+    <div className="w-full p-6 bg-gray-900 text-white min-h-screen ">
+      <header className="flex justify-between items-center mb-10 container mx-auto">
         <h1 className="text-3xl font-bold">Kanban Boards</h1>
         <CreateBoardButton />
       </header>
 
       {boards.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 container mx-auto">
           {boards?.map((board) => (
             <BoardCard key={board.id} board={board} />
           ))}

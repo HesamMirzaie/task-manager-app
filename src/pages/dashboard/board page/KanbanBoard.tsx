@@ -47,7 +47,7 @@ export default function KanbanBoard() {
         <p className="text-red-500">Error fetching columns.</p>
       ) : // when data fetched
       columns.length > 0 ? (
-        <div className="flex gap-6 overflow-x-auto pb-6">
+        <div className="flex gap-6 overflow-x-auto pb-6 container mx-auto">
           {columns.map((column) => (
             <ColumnCard key={column.id} column={column} />
           ))}

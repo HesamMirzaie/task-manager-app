@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export const BoardPageHeader = ({ columns, boardId }: any) => {
   const navigate = useNavigate();
   return (
-    <header className=" flex justify-between mb-4">
+    <header className=" flex justify-between mb-5 container mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-gray-100 flex items-center gap-x-4">
         <div
           className=" bg-slate-700 rounded-full cursor-pointer"
