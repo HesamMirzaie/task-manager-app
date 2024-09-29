@@ -8,6 +8,7 @@ import {
 } from '../ui/card';
 import { DeleteBoardButton } from './buttons/DeleteBoardButton';
 import { EditBoardButton } from './buttons/EditBoardButton';
+import { getFirstTwoLetters } from '../../utils/helper';
 
 export const BoardCard = ({ board }: any) => {
   const navigate = useNavigate();
@@ -26,7 +27,16 @@ export const BoardCard = ({ board }: any) => {
           <p className="text-sm text-gray-400">{board.board_description}</p>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <p>Users</p>
+          <div className=" flex ">
+            {board.board_users.map((user: any, idx: number) => (
+              <p
+                className=" mx-[-4px] flex justify-center items-center gap-x-4 w-8 h-8 bg-slate-400 rounded-full"
+                key={idx}
+              >
+                {getFirstTwoLetters(user)}
+              </p>
+            ))}
+          </div>
           <div>
             <EditBoardButton board={board} />
             <DeleteBoardButton board={board} />

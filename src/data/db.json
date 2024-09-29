@@ -1,10 +1,7 @@
 {
   "users": [
     {
-      "user_email": "ihe3am@gmail.com",
-      "user_name": "",
-      "user_image": "",
-      "id": "543e"
+      "user_email": "ihe3am@gmail.com"
     }
   ],
   "boards": [
@@ -12,33 +9,28 @@
       "id": "cc4bed55-d0d4-4f5a-ba44-c26fd9dd7c24",
       "board_title": "Tapsi",
       "board_description": "Tapsi App",
-      "board_users": [
-        "ihe3am@gmail.com"
-      ]
+      "board_users": ["ihe3am@gmail.com"]
     },
     {
       "id": "ac9407ea-7686-4924-bcc2-96db8757a2df",
       "board_title": "2",
       "board_description": "",
-      "board_users": [
-        "ihe3am@gmail.com"
-      ]
+      "board_users": ["ihe3am@gmail.com"]
     },
     {
       "id": "a2194daa-5ced-4f41-99aa-a658883d53d4",
       "board_title": "3",
       "board_description": "",
-      "board_users": [
-        "ihe3am@gmail.com"
-      ]
+      "board_users": ["ihe3am@gmail.com", "mirzaeeh08@gmail.com"]
+    },
+    {
+      "id": "a0ad8bd4-a683-4ef8-af48-95728d81b857",
+      "board_title": "test",
+      "board_description": "",
+      "board_users": ["mirzaeeh08@gmail.com"]
     }
   ],
   "columns": [
-    {
-      "id": "d98e7bbc-4edb-4be8-9931-842c6248ac04",
-      "title": "Tapsi Tech",
-      "boardId": null
-    },
     {
       "id": "e3bcc196-dd75-4b95-a0d3-d29c133f6907",
       "title": "UI Team",

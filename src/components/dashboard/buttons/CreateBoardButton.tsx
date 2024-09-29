@@ -1,3 +1,4 @@
+// UI Component
 import { Plus } from 'lucide-react';
 import { Button } from '../../ui/button';
 import {
@@ -11,18 +12,22 @@ import {
 } from '../../ui/dialog';
 import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
+// React
 import { useState } from 'react';
-import useAuth from '../../../hooks/useAuth';
+// Hooks
+// Component
 import { Board } from '../../../pages/dashboard/Dashboard';
+// Third party Hooks or functions
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useAuthStore from '../../../store/useUser';
 
 export const CreateBoardButton = () => {
   const [newBoardTitle, setNewBoardTitle] = useState<string>('');
   const [newBoardDescription, setNewBoardDescription] = useState<string>('');
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const { user } = useAuth();
+  const user = useAuthStore((state) => state.user);
   const queryClient = useQueryClient();
 
   const createBoardMutation = useMutation({
@@ -34,7 +39,6 @@ export const CreateBoardButton = () => {
       return response.data;
     },
     onSuccess: () => {
-      // کوئری boards را invalidate می‌کنیم تا لیست بردها به‌روز شود
       queryClient.invalidateQueries(['boards']);
       setNewBoardTitle('');
       setNewBoardDescription('');
@@ -50,10 +54,8 @@ export const CreateBoardButton = () => {
       id: uuidv4(),
       board_title: newBoardTitle,
       board_description: newBoardDescription,
-      board_users: [user.email],
+      board_users: [user.user.email],
     };
-
-    // ایجاد برد جدید
     createBoardMutation.mutate(newBoard);
   };
 

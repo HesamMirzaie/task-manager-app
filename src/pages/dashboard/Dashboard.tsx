@@ -13,7 +13,7 @@ export interface Board {
 
 export default function KanbanDashboard() {
   const fetchBoards = async (): Promise<Board[]> => {
-    const response = await axios.get<Board[]>('http://localhost:5000/boards');
+    const response = await axios.get('http://localhost:5000/boards');
     return response.data;
   };
 
@@ -42,11 +42,9 @@ export default function KanbanDashboard() {
       </header>
 
       {boards.length > 0 ? (
-        <div className="flex overflow-x-auto overflow-y-hidden space-x-4 pb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           {boards?.map((board) => (
-            <div className="flex-shrink-0" key={board.id}>
-              <BoardCard board={board} />
-            </div>
+            <BoardCard key={board.id} board={board} />
           ))}
         </div>
       ) : (
