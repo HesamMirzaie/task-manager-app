@@ -36,32 +36,25 @@ export default function KanbanDashboard() {
   }
 
   return (
-    <div className="w-full p-6 bg-gray-900 text-white min-h-screen ">
-      <Navbar />
+    <div className=" w-full">
       <header className="flex justify-between items-center mb-10 container mx-auto">
         <h1 className="text-3xl font-bold">Kanban Boards</h1>
         <CreateBoardButton />
       </header>
 
-      {boards.length > 0 ? (
+      {boards && boards.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 container mx-auto">
           {boards?.map((board) => (
             <BoardCard key={board.id} board={board} />
           ))}
         </div>
       ) : (
-        <EmptyBoard />
+        <div className="text-center py-8">
+          <p className="text-xl text-gray-400">
+            No boards available. Create your first board to get started!
+          </p>
+        </div>
       )}
-    </div>
-  );
-}
-
-function EmptyBoard() {
-  return (
-    <div className="text-center py-8">
-      <p className="text-xl text-gray-400">
-        No boards available. Create your first board to get started!
-      </p>
     </div>
   );
 }
