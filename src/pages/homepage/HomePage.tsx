@@ -11,7 +11,6 @@ export default function LandingPage() {
   const [isScrolling, setIsScrolling] = useState(false);
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
-  console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {

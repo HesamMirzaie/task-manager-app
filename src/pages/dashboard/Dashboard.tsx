@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Loading } from '../../components/Loading';
 import { CreateBoardButton } from '../../components/dashboard/buttons/CreateBoardButton';
 import { BoardCard } from '../../components/dashboard/BoardCard';
+import { Navbar } from '../../components/Navbar';
 
 export interface Board {
   id: string;
@@ -36,6 +37,7 @@ export default function KanbanDashboard() {
 
   return (
     <div className="w-full p-6 bg-gray-900 text-white min-h-screen ">
+      <Navbar />
       <header className="flex justify-between items-center mb-10 container mx-auto">
         <h1 className="text-3xl font-bold">Kanban Boards</h1>
         <CreateBoardButton />

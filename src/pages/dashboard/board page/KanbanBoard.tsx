@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { ColumnCard } from '../../../components/board/ColumnCard';
 import { BoardPageHeader } from '../../../components/board/BoardPageHeader';
+import { Navbar } from '../../../components/Navbar';
 
 export interface Task {
   id: string;
@@ -38,6 +39,7 @@ export default function KanbanBoard() {
 
   return (
     <div className="p-6 bg-gray-900 min-h-screen text-gray-100">
+      <Navbar />
       <BoardPageHeader columns={columns || []} boardId={boardId} />
       {/* if data in loading */}
       {loadingColumns ? (
