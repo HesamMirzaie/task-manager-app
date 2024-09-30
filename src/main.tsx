@@ -16,7 +16,6 @@ const router = createBrowserRouter([
   { path: '/signup', element: <SignUp /> },
   { path: '/login', element: <Login /> },
   { path: '/dashboard', element: <DashboardLayout /> },
-  { path: '/dashboard/:boardId', element: <DashboardLayout /> },
   { path: '*', element: <PageNotFound /> },
 ]);
 

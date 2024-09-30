@@ -1,57 +1,45 @@
 {
   "users": [
     {
+      "id": "e1",
       "user_email": "ihe3am@gmail.com",
-      "id": "0ee7"
+      "user_name": "Hesam Mirzaee",
+      "user_image": "https://as2.ftcdn.net/v2/jpg/08/24/16/19/1000_F_824161943_bGYdt2CfYGRIkgLsslPmXcqXV6z2T6l3.webp"
+    },
+    {
+      "id": "e2",
+      "user_email": "mirzaeeh08@gmail.com",
+      "user_name": "Hesam Mirzaee",
+      "user_image": "https://as2.ftcdn.net/v2/jpg/08/24/16/19/1000_F_824161943_bGYdt2CfYGRIkgLsslPmXcqXV6z2T6l3.webp"
     }
   ],
   "boards": [
     {
       "id": "cc4bed55-d0d4-4f5a-ba44-c26fd9dd7c24",
+      "board_title": "Piper Enterprise",
+      "board_description": "Piper",
+      "board_users": [
+        "ihe3am@gmail.com"
+      ]
+    },
+    {
+      "id": "cc4bed55-d0d4-4f5a-ba44-c26fd9dd7c24",
+      "board_title": "Web platform",
+      "board_description": "Web",
+      "board_users": [
+        "ihe3am@gmail.com",
+        "mirzaeeh08@gmail.com"
+      ]
+    },
+    {
+      "id": "8cd2d4d3-30f2-45c0-8b8b-685809eb27df",
       "board_title": "Tapsi",
-      "board_description": "Tapsi board for remote team",
+      "board_description": "",
       "board_users": [
         "ihe3am@gmail.com"
       ]
     }
   ],
   "columns": [],
-  "tasks": [
-    {
-      "id": "6c92226d-1603-4c97-a401-e8f31965c0b9",
-      "title": "test",
-      "description": "description",
-      "columnId": "d98e7bbc-4edb-4be8-9931-842c6248ac04"
-    },
-    {
-      "id": "a97189c8-156e-454c-b374-5dc96d259361",
-      "title": "wdad",
-      "description": "",
-      "columnId": null
-    },
-    {
-      "id": "2ee00748-8d35-4111-a508-30710471c969",
-      "title": "wadwad",
-      "description": "",
-      "columnId": null
-    },
-    {
-      "id": "4bfe604c-d30b-4188-826a-e71580914fba",
-      "title": "wdawda",
-      "description": "",
-      "columnId": null
-    },
-    {
-      "id": "4c40c3ff-8801-4168-9e77-9d613b78536c",
-      "title": "wdawdwd",
-      "description": "",
-      "columnId": null
-    },
-    {
-      "id": "f7e073de-0718-4cfc-98b9-d733c19ef678",
-      "title": "adawdad",
-      "description": "",
-      "columnId": null
-    }
-  ]
+  "tasks": []
 }
