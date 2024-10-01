@@ -2,7 +2,7 @@ import { Projects } from './Projects';
 import { ProjectUsers } from './ProjectUsers';
 import { useState } from 'react';
 import { Board } from '../../pages/dashboard/Dashboard';
-import { CreateBoardButton } from '../dashboard/buttons/CreateBoardButton';
+import { CreateBoardButton } from './CreateBoardButton';
 
 export const Sidebar = () => {
   const [activeBoard, setActiveBoard] = useState<Board | null>(null);

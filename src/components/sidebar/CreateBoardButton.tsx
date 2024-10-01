@@ -1,6 +1,6 @@
 // UI Component
 import { Plus } from 'lucide-react';
-import { Button } from '../../ui/button';
+import { Button } from '../ui/button';
 import {
   Dialog,
   DialogContent,
@@ -9,25 +9,19 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../../ui/dialog';
-import { Input } from '../../ui/input';
-import { Textarea } from '../../ui/textarea';
-// React
+} from '../ui/dialog';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
 import { useState } from 'react';
-// Hooks
-// Component
-import { Board } from '../../../pages/dashboard/Dashboard';
-// Third party Hooks or functions
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import useAuthStore from '../../../store/useUser';
+import { Board } from '../../types/types';
 
 export const CreateBoardButton = () => {
   const [newBoardTitle, setNewBoardTitle] = useState<string>('');
   const [newBoardDescription, setNewBoardDescription] = useState<string>('');
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const user = useAuthStore((state) => state.user);
   const queryClient = useQueryClient();
 
   const createBoardMutation = useMutation({
@@ -39,7 +33,7 @@ export const CreateBoardButton = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['boards']);
+      queryClient.invalidateQueries({ queryKey: ['boards'] });
       setNewBoardTitle('');
       setNewBoardDescription('');
       setIsDialogOpen(false);
@@ -54,7 +48,8 @@ export const CreateBoardButton = () => {
       id: uuidv4(),
       board_title: newBoardTitle,
       board_description: newBoardDescription,
-      board_users: [user.user.email],
+      board_image: '',
+      board_users: ['iHe3am@gmail.com'],
     };
     createBoardMutation.mutate(newBoard);
   };

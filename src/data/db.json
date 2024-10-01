@@ -1,6 +1,15 @@
 {
   "users": [],
-  "boards": [],
+  "boards": [
+    {
+      "id": "c1f8ffb0-400b-4519-873a-fe9793ab7c31",
+      "board_title": "Tapsi",
+      "board_description": "",
+      "board_users": [
+        "iHe3am@gmail.com"
+      ]
+    }
+  ],
   "columns": [],
   "tasks": []
 }
