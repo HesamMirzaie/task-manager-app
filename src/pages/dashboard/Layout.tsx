@@ -1,16 +1,16 @@
+import { useQuery } from '@tanstack/react-query';
+import { Board } from '../../components/dashboard/Board';
 import { Navbar } from '../../components/navbar/Navbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { useState } from 'react';
 import { TBoard } from '../../types/types';
-import { Board } from '../../components/dashboard/Board';
 import axios from 'axios';
-import { useQuery } from '@tanstack/react-query';
 
 export const DashboardLayout = () => {
   const [activeBoard, setActiveBoard] = useState<TBoard | null>(null);
 
   const { data: columns = [] } = useQuery({
-    queryKey: ['columns'], // فقط کلید 'columns'
+    queryKey: ['columns'],
     queryFn: async () => {
       const response = await axios.get(`http://localhost:5000/columns`);
       return response.data;
@@ -18,7 +18,9 @@ export const DashboardLayout = () => {
   });
 
   const filteredColumns = activeBoard
-    ? columns.filter((d: any) => d.boardId === activeBoard.id)
+    ? columns
+        .filter((d: any) => d.boardId === activeBoard.id) // فیلتر بر اساس boardId
+        .sort((a: any, b: any) => a.order - b.order) // مرتب‌سازی بر اساس order
     : [];
 
   return (

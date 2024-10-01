@@ -81,10 +81,9 @@ export const Board = ({ activeBoard, filteredColumns }: any) => {
       filteredColumns.findIndex((col: any) => col.id === overColumnId)
     );
 
-    // Update order based on newColumns array
     const updatedColumns = newColumns.map((col, index) => ({
       ...col,
-      order: index + 1, // Make sure the order is being set correctly
+      order: index + 1,
     }));
 
     updateColumnOrder.mutate(updatedColumns);
