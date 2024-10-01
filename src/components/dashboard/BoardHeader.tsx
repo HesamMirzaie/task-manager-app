@@ -7,7 +7,7 @@ import { Button } from '../ui/button';
 
 export const BoardHeader = ({ activeBoard }) => {
   return (
-    <div className="flex justify-between items-center mb-6 p-4">
+    <div className="flex justify-between items-center px-4 py-8 border-b">
       <h2 className="text-2xl font-semibold">{activeBoard.board_title}</h2>
       <div className="flex items-center space-x-2">
         <Avatar className="w-8 h-8">

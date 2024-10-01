@@ -1,7 +1,7 @@
 import { Navbar } from '../../components/navbar/Navbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { useState } from 'react';
-import { TBoard, TColumn } from '../../types/types';
+import { TBoard } from '../../types/types';
 import { Board } from '../../components/dashboard/Board';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
@@ -9,18 +9,17 @@ import { useQuery } from '@tanstack/react-query';
 export const DashboardLayout = () => {
   const [activeBoard, setActiveBoard] = useState<TBoard | null>(null);
 
-  const { data } = useQuery({
-    queryKey: ['columns'],
+  const { data: columns = [] } = useQuery({
+    queryKey: ['columns'], // فقط کلید 'columns'
     queryFn: async () => {
       const response = await axios.get(`http://localhost:5000/columns`);
       return response.data;
     },
   });
 
-  const filteredData = activeBoard
-    ? data?.filter((d) => d.board_id === activeBoard.id)
+  const filteredColumns = activeBoard
+    ? columns.filter((d: any) => d.boardId === activeBoard.id)
     : [];
-  console.log(filteredData);
 
   return (
     <div className="min-h-screen flex overflow-y-hidden">
@@ -29,11 +28,11 @@ export const DashboardLayout = () => {
       </aside>
       <div className="w-full h-full overflow-y-hidden">
         <Navbar />
-        {/* Main Content */}
+        {/* محتوای اصلی */}
         {activeBoard ? (
-          <Board activeBoard={activeBoard} filteredData={filteredData} />
+          <Board activeBoard={activeBoard} filteredColumns={filteredColumns} />
         ) : (
-          <div className=" p-6">Select a board to see its columns</div>
+          <div className="p-6">Choose one Board</div>
         )}
       </div>
     </div>
