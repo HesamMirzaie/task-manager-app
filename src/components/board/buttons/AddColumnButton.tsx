@@ -11,15 +11,15 @@ import {
 import { Button } from '../../ui/button';
 import { Plus } from 'lucide-react';
 import { Input } from '../../ui/input';
-import { Column } from '../../../pages/dashboard/board page/KanbanBoard';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { TColumn } from '../../../types/types';
 
 export const AddColumnButton = ({
   boardId,
 }: {
-  columns: Column[];
+  columns: TColumn[];
   boardId: string;
 }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -29,8 +29,8 @@ export const AddColumnButton = ({
 
   // Mutation to add a new column
   const addColumnMutation = useMutation(
-    async (newColumn: Column) => {
-      const response = await axios.post<Column>(
+    async (newColumn: TColumn) => {
+      const response = await axios.post<TColumn>(
         `http://localhost:5000/columns`,
         newColumn
       );
@@ -41,7 +41,7 @@ export const AddColumnButton = ({
         // Update the columns cache after successful mutation
         queryClient.setQueryData(
           ['columns', boardId],
-          (oldColumns: Column[] | undefined) => {
+          (oldColumns: TColumn[] | undefined) => {
             return oldColumns ? [...oldColumns, data] : [data];
           }
         );
@@ -56,7 +56,7 @@ export const AddColumnButton = ({
 
   const addColumn = () => {
     if (newColumnTitle.trim()) {
-      const newColumn: Column = {
+      const newColumn: TColumn = {
         id: uuidv4(),
         title: newColumnTitle,
         boardId: boardId,

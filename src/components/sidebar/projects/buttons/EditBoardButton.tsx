@@ -1,6 +1,5 @@
-// UI Component
-import { Plus } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Edit } from 'lucide-react';
+import { Button } from '../../../ui/button';
 import {
   Dialog,
   DialogContent,
@@ -9,75 +8,67 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
-import { Input } from '../ui/input';
-import { Textarea } from '../ui/textarea';
+} from '../../../ui/dialog';
+import { Input } from '../../../ui/input';
+import { Textarea } from '../../../ui/textarea';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Board } from '../../types/types';
-import { createAvatar } from '@dicebear/core';
-import { icons } from '@dicebear/collection';
+import { Board } from '../../../../types/types';
 
-export const CreateBoardButton = () => {
-  const [newBoardTitle, setNewBoardTitle] = useState<string>('');
-  const [newBoardDescription, setNewBoardDescription] = useState<string>('');
+export const EditBoardButton = ({ board }: any) => {
+  const [editBoard, setEditBoard] = useState<Board | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
-  const avatar = createAvatar(icons, {
-    seed: newBoardTitle,
-  });
-
-  const createBoardMutation = useMutation({
-    mutationFn: async (newBoard: Board) => {
-      const response = await axios.post<Board>(
-        'http://localhost:5000/boards',
-        newBoard
+  const updateBoardMutation = useMutation({
+    mutationFn: async () => {
+      if (!editBoard) return;
+      const updatedBoard = {
+        id: editBoard.id,
+        board_title: editBoard.board_title,
+        board_description: editBoard.board_description,
+        board_image: editBoard.board_image,
+        board_users: editBoard.board_users,
+      };
+      await axios.put(
+        `http://localhost:5000/boards/${editBoard.id}`,
+        updatedBoard
       );
-      return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['boards'] });
-      setNewBoardTitle('');
-      setNewBoardDescription('');
+      queryClient.invalidateQueries(['boards']);
+      setEditBoard(null);
       setIsDialogOpen(false);
     },
     onError: (error) => {
-      console.error('Error creating board:', error);
+      console.error('Error updating board:', error);
     },
   });
-
-  const handleCreateBoard = () => {
-    const newBoard: Board = {
-      id: uuidv4(),
-      board_title: newBoardTitle,
-      board_description: newBoardDescription,
-      board_image: avatar.toDataUri(),
-      board_users: ['iHe3am@gmail.com'],
-    };
-    createBoardMutation.mutate(newBoard);
-  };
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 rounded-md px-4 py-2 flex items-center space-x-2 shadow-lg hover:shadow-xl"
-          onClick={() => setIsDialogOpen(true)}
+          variant="ghost"
+          size="sm"
+          onClick={(e) => {
+            e.stopPropagation();
+            setEditBoard({ ...board });
+            setIsDialogOpen(true);
+          }}
+          className="text-gray-500 hover:text-blue-600 transition-colors duration-200"
         >
-          <Plus className="h-5 w-5" />
-          <span>Create Board</span>
+          <span>Edit</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-white text-gray-800 border border-gray-300 rounded-lg shadow-xl max-w-md mx-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-blue-600">
-            Create a new board
+            Edit Board
           </DialogTitle>
           <DialogDescription className="text-gray-600 mt-2">
-            Add a title and description for your new Kanban board.
+            Update the title and description of your Kanban board.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-6 py-6">
@@ -91,8 +82,12 @@ export const CreateBoardButton = () => {
             <Input
               id="boardTitle"
               placeholder="Enter board title"
-              value={newBoardTitle}
-              onChange={(e) => setNewBoardTitle(e.target.value)}
+              value={editBoard?.board_title || ''}
+              onChange={(e) =>
+                setEditBoard((prev) =>
+                  prev ? { ...prev, board_title: e.target.value } : null
+                )
+              }
               className="bg-gray-100 text-gray-800 border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 rounded-md transition-all duration-200 placeholder:text-gray-500"
             />
           </div>
@@ -106,18 +101,22 @@ export const CreateBoardButton = () => {
             <Textarea
               id="boardDescription"
               placeholder="Enter board description"
-              value={newBoardDescription}
-              onChange={(e) => setNewBoardDescription(e.target.value)}
+              value={editBoard?.board_description || ''}
+              onChange={(e) =>
+                setEditBoard((prev) =>
+                  prev ? { ...prev, board_description: e.target.value } : null
+                )
+              }
               className="bg-gray-100 text-gray-800 border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 rounded-md transition-all duration-200 min-h-[100px] placeholder:text-gray-500"
             />
           </div>
         </div>
         <DialogFooter>
           <Button
-            onClick={handleCreateBoard}
+            onClick={() => updateBoardMutation.mutate()}
             className="bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg"
           >
-            Create Board
+            Update Board
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -4,20 +4,7 @@ import axios from 'axios';
 import { ColumnCard } from '../../../components/board/ColumnCard';
 import { BoardPageHeader } from '../../../components/board/BoardPageHeader';
 import { Navbar } from '../../../components/navbar/Navbar';
-
-export interface Task {
-  id: string;
-  title: string;
-  description: string;
-  columnId: string;
-}
-
-export interface Column {
-  id: string;
-  title: string;
-  boardId: string | undefined;
-  tasks?: Task[];
-}
+import { Column } from '../../../types/types';
 
 const fetchColumns = async (boardId: string) => {
   const response = await axios.get<Column[]>(`http://localhost:5000/columns`);

@@ -1,12 +1,8 @@
-import { Projects } from './Projects';
+import { Projects } from './projects/Projects';
 import { ProjectUsers } from './ProjectUsers';
-import { useState } from 'react';
-import { Board } from '../../pages/dashboard/Dashboard';
 import { CreateBoardButton } from './CreateBoardButton';
 
-export const Sidebar = () => {
-  const [activeBoard, setActiveBoard] = useState<Board | null>(null);
-
+export const Sidebar = ({ activeBoard, setActiveBoard }) => {
   return (
     <div className="flex flex-col h-full w-64 bg-white border-r p-4">
       <div className=" mb-12">
