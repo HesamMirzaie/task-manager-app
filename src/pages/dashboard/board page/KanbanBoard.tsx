@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { ColumnCard } from '../../../components/board/ColumnCard';
 import { BoardPageHeader } from '../../../components/board/BoardPageHeader';
-import { Navbar } from '../../../components/Navbar';
+import { Navbar } from '../../../components/navbar/Navbar';
 
 export interface Task {
   id: string;

@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Loading } from '../../components/Loading';
 import { CreateBoardButton } from '../../components/dashboard/buttons/CreateBoardButton';
 import { BoardCard } from '../../components/dashboard/BoardCard';
-import { Navbar } from '../../components/Navbar';
 
 export interface Board {
   id: string;
