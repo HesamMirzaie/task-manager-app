@@ -42,7 +42,7 @@ export const ColumnCard = ({ column }: any) => {
         )}
 
         {/* Add new Task */}
-        <AddTaskButton column={column} />
+        {/* <AddTaskButton column={column} /> */}
       </CardContent>
     </Card>
   );

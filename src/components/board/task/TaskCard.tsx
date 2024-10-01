@@ -15,8 +15,8 @@ export const TaskCard = ({ task }: TaskCardProps) => {
       </header>
 
       <div className="flex justify-end mt-2 gap-2">
-        <EditTaskButton task={task} />
-        <DeleteTaskButton task={task} />
+        {/* <EditTaskButton task={task} /> */}
+        {/* <DeleteTaskButton task={task} /> */}
       </div>
     </div>
   );

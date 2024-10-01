@@ -11,17 +11,12 @@ import {
 import { Button } from '../../ui/button';
 import { Plus } from 'lucide-react';
 import { Input } from '../../ui/input';
-import { Column } from '../../../pages/dashboard/board page/KanbanBoard';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Column } from '../../../pages/dashboard/board page/KanbanBoard';
 
-export const AddColumnButton = ({
-  boardId,
-}: {
-  columns: Column[];
-  boardId: string;
-}) => {
+export const AddColumnButton = ({ boardId }: { boardId: string }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
 
@@ -45,11 +40,12 @@ export const AddColumnButton = ({
             return oldColumns ? [...oldColumns, data] : [data];
           }
         );
-        setNewColumnTitle('');
+        setNewColumnTitle(''); // Reset input
         setIsDialogOpen(false); // Close dialog after creating the column
       },
       onError: (error) => {
         console.error('Error adding column:', error);
+        // You could add user feedback here, e.g., a toast or alert for errors
       },
     }
   );
@@ -59,7 +55,7 @@ export const AddColumnButton = ({
       const newColumn: Column = {
         id: uuidv4(),
         title: newColumnTitle,
-        boardId: boardId,
+        boardId,
       };
       addColumnMutation.mutate(newColumn);
     }

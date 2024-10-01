@@ -11,8 +11,8 @@ export const ColumnHeader = ({ column }: any) => {
         </CardTitle>
 
         <div className="flex gap-2">
-          <EditColumnButton column={column} />
-          <DeleteColumnButton column={column} />
+          {/* <EditColumnButton column={column} /> */}
+          {/* <DeleteColumnButton column={column} /> */}
         </div>
       </CardHeader>
     </>

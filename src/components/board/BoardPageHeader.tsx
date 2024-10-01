@@ -15,7 +15,7 @@ export const BoardPageHeader = ({ columns, boardId }: any) => {
         </div>
         Modern Dark Kanban Board
       </h1>
-      <AddColumnButton columns={columns} boardId={boardId} />
+      {/* <AddColumnButton boardId={boardId} /> */}
     </header>
   );
 };
