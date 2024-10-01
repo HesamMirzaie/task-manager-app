@@ -1,28 +1,33 @@
-import { useState } from 'react';
-import { User, LogOut } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Bell, Search, Settings } from 'lucide-react';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
 import useAuthStore from '../store/useUser';
-import supabase from '../utils/supabase';
-import { useNavigate } from 'react-router-dom';
 
-export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+export const Navbar = () => {
   const { user } = useAuthStore((state) => state.user);
-  const navigate = useNavigate();
 
   return (
-    <nav className=" bg-red-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <span className="ml-2 text-xl font-bold text-blue-600">
-                TaskChi
-              </span>
-            </div>
-          </div>
+    <nav className="flex items-center justify-between p-4 bg-white border-b">
+      <div className="flex items-center w-full max-w-sm relative">
+        <Search className="w-4 h-4 mr-2 text-gray-400 absolute left-2" />
+        <Input type="search" className="w-full " />
+      </div>
+      <div className="flex items-center space-x-4">
+        <Button variant="ghost" size="icon">
+          <Settings className="w-5 h-5 text-gray-600" />
+        </Button>
+        <Button variant="ghost" size="icon">
+          <Bell className="w-5 h-5 text-gray-600" />
+        </Button>
+        <div className="flex items-center space-x-2">
+          <p className="w-8 h-8 flex justify-center items-center text-sm font-medium rounded-full bg-gray-200 text-gray-700">
+            {[...user.email].splice(0, 2).join('').toUpperCase()}
+          </p>
+          <span className="text-sm font-medium text-gray-700">
+            {user.email}
+          </span>
         </div>
       </div>
     </nav>
   );
-}
+};

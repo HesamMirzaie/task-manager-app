@@ -63,19 +63,19 @@ export const CreateBoardButton = () => {
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-indigo-600 text-white hover:bg-indigo-700 transition-colors duration-200 rounded-full px-4 py-2 flex items-center space-x-2 shadow-lg hover:shadow-xl"
+          className="bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 rounded-md px-4 py-2 flex items-center space-x-2 shadow-lg hover:shadow-xl"
           onClick={() => setIsDialogOpen(true)}
         >
           <Plus className="h-5 w-5" />
           <span>Create Board</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-gray-900 text-white border border-gray-700 rounded-lg shadow-2xl max-w-md mx-auto">
+      <DialogContent className="bg-white text-gray-800 border border-gray-300 rounded-lg shadow-xl max-w-md mx-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-indigo-400">
+          <DialogTitle className="text-2xl font-bold text-blue-600">
             Create a new board
           </DialogTitle>
-          <DialogDescription className="text-gray-400 mt-2">
+          <DialogDescription className="text-gray-600 mt-2">
             Add a title and description for your new Kanban board.
           </DialogDescription>
         </DialogHeader>
@@ -83,7 +83,7 @@ export const CreateBoardButton = () => {
           <div className="space-y-2">
             <label
               htmlFor="boardTitle"
-              className="text-sm font-medium text-gray-300"
+              className="text-sm font-medium text-gray-700"
             >
               Board Title
             </label>
@@ -92,13 +92,13 @@ export const CreateBoardButton = () => {
               placeholder="Enter board title"
               value={newBoardTitle}
               onChange={(e) => setNewBoardTitle(e.target.value)}
-              className="bg-gray-800 text-white border-gray-700 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 rounded-md transition-all duration-200 placeholder:text-gray-500"
+              className="bg-gray-100 text-gray-800 border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 rounded-md transition-all duration-200 placeholder:text-gray-500"
             />
           </div>
           <div className="space-y-2">
             <label
               htmlFor="boardDescription"
-              className="text-sm font-medium text-gray-300"
+              className="text-sm font-medium text-gray-700"
             >
               Board Description
             </label>
@@ -107,14 +107,14 @@ export const CreateBoardButton = () => {
               placeholder="Enter board description"
               value={newBoardDescription}
               onChange={(e) => setNewBoardDescription(e.target.value)}
-              className="bg-gray-800 text-white border-gray-700 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 rounded-md transition-all duration-200 min-h-[100px] placeholder:text-gray-500"
+              className="bg-gray-100 text-gray-800 border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 rounded-md transition-all duration-200 min-h-[100px] placeholder:text-gray-500"
             />
           </div>
         </div>
         <DialogFooter>
           <Button
             onClick={handleCreateBoard}
-            className="bg-indigo-600 text-white hover:bg-indigo-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg"
+            className="bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg"
           >
             Create Board
           </Button>

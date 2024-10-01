@@ -1,39 +1,17 @@
 {
-  "users": [
-    {
-      "id": "e1",
-      "user_email": "ihe3am@gmail.com",
-      "user_name": "Hesam Mirzaee",
-      "user_image": "https://as2.ftcdn.net/v2/jpg/08/24/16/19/1000_F_824161943_bGYdt2CfYGRIkgLsslPmXcqXV6z2T6l3.webp"
-    },
-    {
-      "id": "e2",
-      "user_email": "mirzaeeh08@gmail.com",
-      "user_name": "Hesam Mirzaee",
-      "user_image": "https://as2.ftcdn.net/v2/jpg/08/24/16/19/1000_F_824161943_bGYdt2CfYGRIkgLsslPmXcqXV6z2T6l3.webp"
-    }
-  ],
+  "users": [],
   "boards": [
     {
-      "id": "cc4bed55-d0d4-4f5a-ba44-c26fd9dd7c24",
-      "board_title": "Piper Enterprise",
-      "board_description": "Piper",
+      "id": "c06da09b-1e39-4ea3-a0c9-cfaf3bcb9127",
+      "board_title": "Tapsi",
+      "board_description": "",
       "board_users": [
         "ihe3am@gmail.com"
       ]
     },
     {
-      "id": "cc4bed55-d0d4-4f5a-ba44-c26fd9dd7c24",
-      "board_title": "Web platform",
-      "board_description": "Web",
-      "board_users": [
-        "ihe3am@gmail.com",
-        "mirzaeeh08@gmail.com"
-      ]
-    },
-    {
-      "id": "8cd2d4d3-30f2-45c0-8b8b-685809eb27df",
-      "board_title": "Tapsi",
+      "id": "3b20aac1-5a04-45c6-9404-723702efbf19",
+      "board_title": "Snapp!",
       "board_description": "",
       "board_users": [
         "ihe3am@gmail.com"

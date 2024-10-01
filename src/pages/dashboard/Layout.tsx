@@ -1,6 +1,5 @@
 import { Navbar } from '../../components/Navbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
-import KanbanBoard from './board page/KanbanBoard';
 
 export const DashboardLayout = () => {
   return (
@@ -10,9 +9,7 @@ export const DashboardLayout = () => {
       </aside>
       <div className=" w-full h-full">
         <Navbar />
-        <main className="flex-1 h-full">
-          <KanbanBoard />
-        </main>
+        <main className="flex-1 h-full">{/* <KanbanBoard /> */}</main>
       </div>
     </div>
   );
