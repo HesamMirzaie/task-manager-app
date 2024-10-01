@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import supabase from '../../utils/supabase';
+import { useAddUserToBoards } from './useAddUserToBoards';
 
 type SignUpFormValues = {
   name: string;
@@ -16,6 +17,8 @@ export function SignUp() {
     formState: { errors, isSubmitting },
   } = useForm<SignUpFormValues>();
 
+  const addUserToBoards = useAddUserToBoards();
+
   const handleSignUp = async (data: SignUpFormValues) => {
     try {
       const { error } = await supabase.auth.signUp({
@@ -25,10 +28,16 @@ export function SignUp() {
 
       if (error) {
         console.error('Sign-up error:', error.message);
-        // You can display an error message to the user here
         alert(`Sign-up failed: ${error.message}`);
       } else {
         alert('Sign-up successful! Please check your email for confirmation.');
+
+        // اضافه کردن ایمیل به دیتابیس boards
+        addUserToBoards.mutate(data.email, {
+          onError: (err) => {
+            console.error('Failed to add user to boards:', err);
+          },
+        });
       }
     } catch (error) {
       console.error('Unexpected error:', error);

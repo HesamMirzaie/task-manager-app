@@ -1,23 +1,6 @@
 {
   "users": [],
-  "boards": [
-    {
-      "id": "c06da09b-1e39-4ea3-a0c9-cfaf3bcb9127",
-      "board_title": "Tapsi",
-      "board_description": "",
-      "board_users": [
-        "ihe3am@gmail.com"
-      ]
-    },
-    {
-      "id": "3b20aac1-5a04-45c6-9404-723702efbf19",
-      "board_title": "Snapp!",
-      "board_description": "",
-      "board_users": [
-        "ihe3am@gmail.com"
-      ]
-    }
-  ],
+  "boards": [],
   "columns": [],
   "tasks": []
 }
