@@ -24,17 +24,14 @@
     {
       "id": "da13b67a-f0cf-44df-9f39-4f11d9654c69",
       "title": "Tapsi",
-      "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4"
+      "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
+      "order": 2
     },
     {
       "id": "7df0e72a-7f8c-4589-b71d-18b18818b30a",
       "title": "Snapp",
-      "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4"
-    },
-    {
-      "id": "f10eefcd-ac3f-4eec-9b21-aa38fdcb8f58",
-      "title": "Diginext",
-      "boardId": "f991c92f-210c-422c-ae97-d7a5ccea397d"
+      "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
+      "order": 1
     }
   ]
 }
