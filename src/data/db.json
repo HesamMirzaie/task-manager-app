@@ -25,13 +25,13 @@
       "id": "da13b67a-f0cf-44df-9f39-4f11d9654c69",
       "title": "Tapsi Driver",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
-      "order": 1
+      "order": 2
     },
     {
       "id": "c21745c9-9457-4b84-88d8-62a0fbdece82",
       "title": "Snapp Drive",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
-      "order": 2
+      "order": 1
     }
   ],
   "tasks": [
