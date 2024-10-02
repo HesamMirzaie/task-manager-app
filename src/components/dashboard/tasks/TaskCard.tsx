@@ -2,8 +2,10 @@ import { ITask } from '../../../types/types';
 import { Avatar, AvatarFallback } from '../../ui/avatar';
 import { Badge } from '../../ui/badge';
 import { TaskDropDown } from './buttons/TaskDropDown';
-
-export const TaskCard = ({ task }: { task: ITask }) => {
+interface TaskCardProps {
+  task: ITask;
+}
+export const TaskCard = ({ task }: TaskCardProps) => {
   return (
     <div
       key={task.id}

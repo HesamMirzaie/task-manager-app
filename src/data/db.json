@@ -25,19 +25,19 @@
       "id": "03847fde-f03c-4f31-9c80-006e5f3cf2ba",
       "title": "To Do",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
-      "order": 2
+      "order": 1
     },
     {
       "id": "440fe549-e7e7-4a9c-8c44-b6c6303dc364",
       "title": "In Progress",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
-      "order": 3
+      "order": 2
     },
     {
       "id": "e1a22dd8-fb50-4dc8-90de-60b3ecf351e5",
       "title": "Done",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
-      "order": 1
+      "order": 3
     }
   ],
   "tasks": [

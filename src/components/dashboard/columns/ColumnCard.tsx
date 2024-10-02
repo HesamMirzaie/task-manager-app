@@ -1,4 +1,3 @@
-// ColumnCard component
 import { useSortable } from '@dnd-kit/sortable';
 import { ColumnDropDown } from './buttons/ColumnDropDown';
 import { CSS } from '@dnd-kit/utilities';
