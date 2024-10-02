@@ -9,8 +9,17 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
-
-export const ProjectCard = ({ board, activeBoard, setActiveBoard }: any) => {
+import { IBoard } from '../../../types/types';
+interface ProjectCardProps {
+  board: IBoard;
+  activeBoard: IBoard | null;
+  setActiveBoard: (board: IBoard | null) => void;
+}
+export const ProjectCard = ({
+  board,
+  activeBoard,
+  setActiveBoard,
+}: ProjectCardProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
@@ -44,8 +53,11 @@ export const ProjectCard = ({ board, activeBoard, setActiveBoard }: any) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="space-y-1 bg-white rounded-md shadow-lg p-2 w-32">
-            <EditBoardButton board={board} />
-            <DeleteBoardButton board={board} />
+            <EditBoardButton />
+            <DeleteBoardButton
+              setActiveBoard={setActiveBoard}
+              boardId={board.id}
+            />
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

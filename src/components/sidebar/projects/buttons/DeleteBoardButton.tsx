@@ -13,9 +13,18 @@ import {
   AlertDialogTrigger,
 } from '../../../ui/alert-dialog';
 import { Button } from '../../../ui/button';
+import { IBoard } from '../../../../types/types';
 
-export const DeleteBoardButton = ({ board, setActiveBoard }: any) => {
-  const [deleteBoardId, setDeleteBoardId] = useState<string | null>(null);
+interface DeleteBoardButtonProps {
+  boardId: string; // Pass the board ID to delete
+  setActiveBoard: (board: IBoard | null) => void;
+}
+
+export const DeleteBoardButton = ({
+  boardId,
+  setActiveBoard,
+}: DeleteBoardButtonProps) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const queryClient = useQueryClient();
 
   // Refactor mutation to v5 syntax
@@ -25,8 +34,8 @@ export const DeleteBoardButton = ({ board, setActiveBoard }: any) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['boards']); // Refresh the 'boards' query after deletion
-      setDeleteBoardId(null); // Close the dialog
-      setActiveBoard('');
+      setActiveBoard(null); // Close the dialog
+      setIsDialogOpen(false); // Close the dialog
     },
     onError: (error) => {
       console.error('Error deleting board:', error);
@@ -34,7 +43,7 @@ export const DeleteBoardButton = ({ board, setActiveBoard }: any) => {
   });
 
   return (
-    <AlertDialog>
+    <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <AlertDialogTrigger asChild>
         <Button variant="outline" className="w-full text-sm py-1 text-red-600">
           Delete
@@ -54,7 +63,7 @@ export const DeleteBoardButton = ({ board, setActiveBoard }: any) => {
           <AlertDialogCancel asChild>
             <Button
               variant="outline"
-              onClick={() => setDeleteBoardId(null)}
+              onClick={() => setIsDialogOpen(false)}
               className="text-gray-600"
             >
               Cancel
@@ -63,9 +72,7 @@ export const DeleteBoardButton = ({ board, setActiveBoard }: any) => {
           <AlertDialogAction asChild>
             <Button
               onClick={() => {
-                if (deleteBoardId) {
-                  deleteBoardMutation.mutate(deleteBoardId);
-                }
+                deleteBoardMutation.mutate(boardId); // Pass boardId directly
               }}
               className="bg-red-600 text-white hover:bg-red-700 transition-colors duration-200 rounded-full px-6 py-2 shadow-md hover:shadow-lg"
             >

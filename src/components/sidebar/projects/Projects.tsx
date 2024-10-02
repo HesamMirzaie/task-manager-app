@@ -2,10 +2,15 @@ import { ScrollArea } from '../../ui/scroll-area';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { ProjectCard } from './ProjectCard';
-import { TBoard } from '../../../types/types';
+import { IBoard } from '../../../types/types';
 
-export const Projects = ({ activeBoard, setActiveBoard }: any) => {
-  const fetchBoards = async (): Promise<TBoard[]> => {
+interface ProjectsProps {
+  activeBoard: IBoard | null;
+  setActiveBoard: (board: IBoard) => void;
+}
+
+export const Projects = ({ activeBoard, setActiveBoard }: ProjectsProps) => {
+  const fetchBoards = async (): Promise<IBoard[]> => {
     const response = await axios.get('http://localhost:5000/boards');
     return response.data;
   };
@@ -14,7 +19,7 @@ export const Projects = ({ activeBoard, setActiveBoard }: any) => {
     data: boards,
     isLoading,
     isError,
-  } = useQuery({
+  } = useQuery<IBoard[]>({
     queryKey: ['boards'],
     queryFn: fetchBoards,
   });

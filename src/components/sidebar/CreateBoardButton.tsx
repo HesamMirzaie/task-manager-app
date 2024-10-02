@@ -16,9 +16,9 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Board } from '../../types/types';
 import { createAvatar } from '@dicebear/core';
 import { icons } from '@dicebear/collection';
+import { IBoard } from '../../types/types';
 
 export const CreateBoardButton = () => {
   const [newBoardTitle, setNewBoardTitle] = useState<string>('');
@@ -31,8 +31,8 @@ export const CreateBoardButton = () => {
   });
 
   const createBoardMutation = useMutation({
-    mutationFn: async (newBoard: Board) => {
-      const response = await axios.post<Board>(
+    mutationFn: async (newBoard: IBoard) => {
+      const response = await axios.post<IBoard>(
         'http://localhost:5000/boards',
         newBoard
       );
@@ -50,7 +50,7 @@ export const CreateBoardButton = () => {
   });
 
   const handleCreateBoard = () => {
-    const newBoard: Board = {
+    const newBoard: IBoard = {
       id: uuidv4(),
       board_title: newBoardTitle,
       board_description: newBoardDescription,
@@ -64,7 +64,7 @@ export const CreateBoardButton = () => {
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 rounded-md px-4 py-2 flex items-center space-x-2 shadow-lg hover:shadow-xl"
+          className="border-blue-300 hover:border-blue-600 border-2 border-dotted text-blue-600  rounded-md px-4 py-2 flex items-center space-x-2  "
           onClick={() => setIsDialogOpen(true)}
         >
           <Plus className="h-5 w-5" />

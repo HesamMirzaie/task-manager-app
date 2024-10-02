@@ -13,10 +13,10 @@ import { Textarea } from '../../../ui/textarea';
 import { useState } from 'react';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { TBoard } from '../../../../types/types';
+import { IBoard } from '../../../../types/types';
 
-export const EditBoardButton = ({ board }: any) => {
-  const [editBoard, setEditBoard] = useState<TBoard | null>(null);
+export const EditBoardButton = () => {
+  const [editBoard, setEditBoard] = useState<IBoard | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const queryClient = useQueryClient();
 

@@ -3,11 +3,11 @@ import { Board } from '../../components/dashboard/boards/Board';
 import { Navbar } from '../../components/navbar/Navbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { useState } from 'react';
-import { TBoard } from '../../types/types';
 import axios from 'axios';
+import { IBoard, IColumn } from '../../types/types';
 
 export const DashboardLayout = () => {
-  const [activeBoard, setActiveBoard] = useState<TBoard | null>(null);
+  const [activeBoard, setActiveBoard] = useState<IBoard | null>(null);
 
   const { data: columns = [] } = useQuery({
     queryKey: ['columns'],
@@ -19,8 +19,8 @@ export const DashboardLayout = () => {
 
   const filteredColumns = activeBoard
     ? columns
-        .filter((d: any) => d.boardId === activeBoard.id)
-        .sort((a: any, b: any) => a.order - b.order)
+        .filter((column: IColumn) => column.boardId === activeBoard.id)
+        .sort((a: IColumn, b: IColumn) => a.order - b.order)
     : [];
 
   return (

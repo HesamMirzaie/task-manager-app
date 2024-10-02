@@ -6,7 +6,7 @@ export const TaskCard = ({ task }: { task: ITask }) => {
   return (
     <div
       key={task.id}
-      className="  bg-white  px-4 py-2 h-[200px] max-h-[200px]  flex flex-col justify-between text-left rounded-xl cursor-grab"
+      className=" border  bg-white  px-4 py-2 h-[200px] max-h-[200px]  flex flex-col justify-between text-left rounded-xl cursor-grab"
     >
       <div className=" flex items-center justify-between mb-2">
         <Badge>Design</Badge>
