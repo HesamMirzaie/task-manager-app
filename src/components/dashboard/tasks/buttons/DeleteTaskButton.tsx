@@ -8,8 +8,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
   AlertDialogCancel,
-} from '../ui/alert-dialog';
-import { Button } from '../ui/button';
+} from '../../../ui/alert-dialog';
+import { Button } from '../../../ui/button';
 import axios from 'axios';
 export const DeleteTaskButton = ({ taskId }: any) => {
   const queryClient = useQueryClient();

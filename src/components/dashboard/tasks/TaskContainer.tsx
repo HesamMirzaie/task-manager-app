@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { CreateTaskColumn } from './CreateTaskColumn';
+import { CreateTaskColumn } from './buttons/CreateTaskColumn';
 import { TaskCard } from './TaskCard';
 
 export const TaskContainer = ({ columnId }: { columnId: string }) => {

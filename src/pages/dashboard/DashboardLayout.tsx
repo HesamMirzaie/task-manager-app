@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Board } from '../../components/dashboard/Board';
+import { Board } from '../../components/dashboard/boards/Board';
 import { Navbar } from '../../components/navbar/Navbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { useState } from 'react';
@@ -19,8 +19,8 @@ export const DashboardLayout = () => {
 
   const filteredColumns = activeBoard
     ? columns
-        .filter((d: any) => d.boardId === activeBoard.id) // فیلتر بر اساس boardId
-        .sort((a: any, b: any) => a.order - b.order) // مرتب‌سازی بر اساس order
+        .filter((d: any) => d.boardId === activeBoard.id)
+        .sort((a: any, b: any) => a.order - b.order)
     : [];
 
   return (

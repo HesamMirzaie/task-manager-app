@@ -1,8 +1,8 @@
 // ColumnCard component
 import { useSortable } from '@dnd-kit/sortable';
-import { ColumnDropDown } from './ColumnDropDown';
+import { ColumnDropDown } from './buttons/ColumnDropDown';
 import { CSS } from '@dnd-kit/utilities';
-import { TaskContainer } from './TaskContainer';
+import { TaskContainer } from '../tasks/TaskContainer';
 
 export const ColumnCard = ({ column }: any) => {
   const {

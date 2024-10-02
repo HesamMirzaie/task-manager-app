@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { Button } from '../ui/button';
+import { Button } from '../../../ui/button';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
+} from '../../../ui/dropdown-menu';
 import { EllipsisVertical } from 'lucide-react';
-import { EditTaskButton } from './EditTaskButton';
-import { DeleteTaskButton } from './DeleteTaskButton';
+import { DeleteColumnButton } from './DeleteColumnButton';
+import { EditColumnButton } from './EditColumnButton';
 
-export const TaskDropDown = ({ taskId }: any) => {
+export const ColumnDropDown = ({ columnId }: { columnId: string }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="absolute right-4">
+    <div className="relative">
       <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="p-2">
@@ -22,8 +22,11 @@ export const TaskDropDown = ({ taskId }: any) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="space-y-1 bg-white rounded-md shadow-lg p-2 w-32">
-          <EditTaskButton taskId={taskId} />
-          <DeleteTaskButton taskId={taskId} />
+          <EditColumnButton
+            columnId={columnId}
+            setIsDropdownOpen={setIsDropdownOpen}
+          />
+          <DeleteColumnButton columnId={columnId} />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

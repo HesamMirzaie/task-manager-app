@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   Dialog,
   DialogContent,
@@ -6,37 +6,39 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogFooter,
-} from '../ui/dialog';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+} from '../../../ui/dialog';
+import { Input } from '../../../ui/input';
 import axios from 'axios';
+import { useState } from 'react';
+import { Button } from '../../../ui/button';
 
-export const EditTaskButton = ({ taskId }: { taskId: string }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+export const EditColumnButton = ({ columnId, setIsDropdownOpen }: any) => {
   const [newTitle, setNewTitle] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const queryClient = useQueryClient();
 
-  const editTaskTitleMutation = useMutation({
-    mutationFn: async (updatedTask: { title: string }) => {
-      await axios.patch(`http://localhost:5000/tasks/${taskId}`, updatedTask);
+  const editColumnTitleMutation = useMutation({
+    mutationFn: async (updatedColumn: { title: string }) => {
+      await axios.patch(
+        `http://localhost:5000/columns/${columnId}`,
+        updatedColumn
+      );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['tasks']);
+      queryClient.invalidateQueries(['columns']);
       setIsDialogOpen(false);
-      // setIsDropdownOpen(false);
+      setIsDropdownOpen(false);
     },
     onError: (error) => {
-      console.error('Error updating Task title:', error);
+      console.error('Error updating column title:', error);
     },
   });
 
   const handleEditTitle = () => {
     if (newTitle.trim()) {
-      editTaskTitleMutation.mutate({ title: newTitle });
+      editColumnTitleMutation.mutate({ title: newTitle });
     }
   };
-
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
@@ -47,14 +49,14 @@ export const EditTaskButton = ({ taskId }: { taskId: string }) => {
       <DialogContent className="bg-white text-gray-800">
         <DialogHeader>
           <DialogTitle className="text-lg font-bold">
-            Edit Task Title
+            Edit Column Title
           </DialogTitle>
         </DialogHeader>
         <div className="mt-4">
           <Input
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
-            placeholder="Enter new task title"
+            placeholder="Enter new column title"
             className="w-full"
           />
         </div>
@@ -62,15 +64,11 @@ export const EditTaskButton = ({ taskId }: { taskId: string }) => {
           <Button
             variant="outline"
             className="text-gray-600"
-            onClick={() => setIsDialogOpen(false)} // Close the dialog
+            onClick={() => setIsDialogOpen(false)} // بستن دیالوگ
           >
             Cancel
           </Button>
-          <Button
-            onClick={handleEditTitle} // Pass newTitle to the mutation
-            variant="default"
-            className="bg-blue-600 text-white"
-          >
+          <Button onClick={handleEditTitle} className="bg-blue-600 text-white">
             Save
           </Button>
         </DialogFooter>

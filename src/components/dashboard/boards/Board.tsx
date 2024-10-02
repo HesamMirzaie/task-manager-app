@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { BoardHeader } from './BoardHeader';
-import { ColumnsContainer } from './ColumnsContainer';
-import { CreateColumnButton } from './CreateColumnButton';
+import { ColumnsContainer } from '../columns/ColumnsContainer';
+import { CreateColumnButton } from '../columns/buttons/CreateColumnButton';
 import {
   DndContext,
   DragEndEvent,

@@ -1,5 +1,5 @@
-import { ColumnDropDown } from './ColumnDropDown';
-import { TaskDropDown } from './TaskDropDown';
+import { ColumnDropDown } from '../columns/buttons/ColumnDropDown';
+import { TaskDropDown } from './buttons/TaskDropDown';
 
 export const TaskCard = ({ task }: any) => {
   return (

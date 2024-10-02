@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
-import { TColumn } from '../../types/types';
+import { TColumn } from '../../../../types/types';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 

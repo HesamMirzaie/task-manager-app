@@ -7,7 +7,7 @@ import HomePage from './pages/homepage/HomePage';
 import { SignUp } from './pages/signup/SignUp';
 import { Login } from './pages/login/Login';
 import PageNotFound from './pages/404 page/PageNotFound';
-import { DashboardLayout } from './pages/dashboard/Layout';
+import { DashboardLayout } from './pages/dashboard/DashboardLayout';
 
 const queryClient = new QueryClient();
 
