@@ -8,6 +8,7 @@ export interface IBoard {
 export interface IColumn {
   id: string;
   title: string;
+  description: string;
   boardId: string | undefined;
   order: number;
 }

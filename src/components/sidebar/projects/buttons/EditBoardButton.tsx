@@ -10,15 +10,34 @@ import {
 } from '../../../ui/dialog';
 import { Input } from '../../../ui/input';
 import { Textarea } from '../../../ui/textarea';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { IBoard } from '../../../../types/types';
-
-export const EditBoardButton = () => {
+interface EditBoardButtonProps {
+  boardId: string;
+}
+export const EditBoardButton = ({ boardId }: EditBoardButtonProps) => {
   const [editBoard, setEditBoard] = useState<IBoard | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const queryClient = useQueryClient();
+
+  // Fetch the board data when the dialog is opened
+  useEffect(() => {
+    if (isDialogOpen && boardId) {
+      const fetchBoard = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:5000/boards/${boardId}`
+          );
+          setEditBoard(response.data);
+        } catch (error) {
+          console.error('Error fetching board data:', error);
+        }
+      };
+      fetchBoard();
+    }
+  }, [isDialogOpen, boardId]);
 
   const updateBoardMutation = useMutation({
     mutationFn: async () => {

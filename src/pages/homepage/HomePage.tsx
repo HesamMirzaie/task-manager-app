@@ -41,10 +41,10 @@ export default function LandingPage() {
               Task manager
             </a>
             <Button
-              onClick={() => navigate('login')}
+              onClick={() => navigate('Dashboard')}
               className=" text-black border-white bg-indigo-300  hover:text-white transition-colors rounded-full"
             >
-              login
+              Dashboard
             </Button>
           </div>
         </div>

@@ -53,7 +53,7 @@ export const ProjectCard = ({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="space-y-1 bg-white rounded-md shadow-lg p-2 w-32">
-            <EditBoardButton />
+            <EditBoardButton boardId={board.id} />
             <DeleteBoardButton
               setActiveBoard={setActiveBoard}
               boardId={board.id}

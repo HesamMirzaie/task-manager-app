@@ -9,35 +9,33 @@
       "board_users": [
         "iHe3am@gmail.com"
       ]
-    },
-    {
-      "id": "f962043a-bd36-466b-9c6c-8af158b29af0",
-      "board_title": "Digikala",
-      "board_description": "Digikala is a ecommerce app in iran",
-      "board_image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20shape-rendering%3D%22auto%22%3E%3Cmetadata%20xmlns%3Ardf%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%22%20xmlns%3Axsi%3D%22http%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema-instance%22%20xmlns%3Adc%3D%22http%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%22%20xmlns%3Adcterms%3D%22http%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%22%3E%3Crdf%3ARDF%3E%3Crdf%3ADescription%3E%3Cdc%3Atitle%3EBootstrap%20Icons%3C%2Fdc%3Atitle%3E%3Cdc%3Acreator%3EThe%20Bootstrap%20Authors%3C%2Fdc%3Acreator%3E%3Cdc%3Asource%20xsi%3Atype%3D%22dcterms%3AURI%22%3Ehttps%3A%2F%2Fgithub.com%2Ftwbs%2Ficons%3C%2Fdc%3Asource%3E%3Cdcterms%3Alicense%20xsi%3Atype%3D%22dcterms%3AURI%22%3Ehttps%3A%2F%2Fgithub.com%2Ftwbs%2Ficons%2Fblob%2Fmain%2FLICENSE%3C%2Fdcterms%3Alicense%3E%3Cdc%3Arights%3E%E2%80%9EBootstrap%20Icons%E2%80%9D%20(https%3A%2F%2Fgithub.com%2Ftwbs%2Ficons)%20by%20%E2%80%9EThe%20Bootstrap%20Authors%E2%80%9D%2C%20licensed%20under%20%E2%80%9EMIT%E2%80%9D%20(https%3A%2F%2Fgithub.com%2Ftwbs%2Ficons%2Fblob%2Fmain%2FLICENSE)%3C%2Fdc%3Arights%3E%3C%2Frdf%3ADescription%3E%3C%2Frdf%3ARDF%3E%3C%2Fmetadata%3E%3Cmask%20id%3D%22viewboxMask%22%3E%3Crect%20width%3D%2224%22%20height%3D%2224%22%20rx%3D%220%22%20ry%3D%220%22%20x%3D%220%22%20y%3D%220%22%20fill%3D%22%23fff%22%20%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23viewboxMask)%22%3E%3Crect%20fill%3D%22%23ffcc80%22%20width%3D%2224%22%20height%3D%2224%22%20x%3D%220%22%20y%3D%220%22%20%2F%3E%3Cg%20transform%3D%22translate(4%204)%22%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22M8%205a1.5%201.5%200%201%200%200-3%201.5%201.5%200%200%200%200%203Zm0%204a1.5%201.5%200%201%200%200-3%201.5%201.5%200%200%200%200%203Zm1.5%202.5a1.5%201.5%200%201%201-3%200%201.5%201.5%200%200%201%203%200Z%22%2F%3E%3Cpath%20d%3D%22M4%202a2%202%200%200%201%202-2h4a2%202%200%200%201%202%202h2c-.167.5-.8%201.6-2%202v2h2c-.167.5-.8%201.6-2%202v2h2c-.167.5-.8%201.6-2%202v1a2%202%200%200%201-2%202H6a2%202%200%200%201-2-2v-1c-1.2-.4-1.833-1.5-2-2h2V8c-1.2-.4-1.833-1.5-2-2h2V4c-1.2-.4-1.833-1.5-2-2h2Zm2-1a1%201%200%200%200-1%201v11a1%201%200%200%200%201%201h4a1%201%200%200%200%201-1V2a1%201%200%200%200-1-1H6Z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
-      "board_users": [
-        "iHe3am@gmail.com"
-      ]
     }
   ],
   "columns": [
     {
       "id": "03847fde-f03c-4f31-9c80-006e5f3cf2ba",
-      "title": "To Do",
+      "title": "ToDo",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
-      "order": 1
+      "order": 3
     },
     {
       "id": "440fe549-e7e7-4a9c-8c44-b6c6303dc364",
       "title": "In Progress",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
-      "order": 2
+      "order": 1
     },
     {
       "id": "e1a22dd8-fb50-4dc8-90de-60b3ecf351e5",
       "title": "Done",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
-      "order": 3
+      "order": 2
+    },
+    {
+      "id": "ca55262d-b5b2-42a4-8e06-fa8971a265a9",
+      "title": "Finished",
+      "description": "Finished Tasks should be here",
+      "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
+      "order": 4
     }
   ],
   "tasks": [
@@ -49,8 +47,8 @@
     },
     {
       "id": "4d636009-55e8-4ab5-9768-42c2afe7d96e",
-      "title": "Todo",
-      "description": "Add Todo for app\n",
+      "title": "Todoes",
+      "description": "Tedoes description",
       "columnId": "03847fde-f03c-4f31-9c80-006e5f3cf2ba"
     },
     {
