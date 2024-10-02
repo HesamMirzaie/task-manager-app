@@ -2,6 +2,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { ColumnDropDown } from './ColumnDropDown';
 import { CSS } from '@dnd-kit/utilities';
+import { TaskContainer } from './TaskContainer';
 
 export const ColumnCard = ({ column }: any) => {
   const {
@@ -54,7 +55,7 @@ export const ColumnCard = ({ column }: any) => {
         <ColumnDropDown columnId={column.id} />
       </div>
       {/* Column Task Container */}
-      <div className="flex flex-grow">1</div>
+      <TaskContainer columnId={column.id} />
     </div>
   );
 };

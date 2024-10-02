@@ -23,15 +23,22 @@
   "columns": [
     {
       "id": "da13b67a-f0cf-44df-9f39-4f11d9654c69",
-      "title": "Tapsi",
+      "title": "Tapsi Driver",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
       "order": 1
     },
     {
-      "id": "7df0e72a-7f8c-4589-b71d-18b18818b30a",
-      "title": "Snapp",
+      "id": "c21745c9-9457-4b84-88d8-62a0fbdece82",
+      "title": "Snapp Drive",
       "boardId": "19a628d2-c04a-4898-b13f-29545b1b49b4",
-      "order": 3
+      "order": 2
+    }
+  ],
+  "tasks": [
+    {
+      "id": "6b1a5523-9771-419a-9f95-6d3e67d21e2c",
+      "title": "Task",
+      "columnId": "da13b67a-f0cf-44df-9f39-4f11d9654c69"
     }
   ]
 }
