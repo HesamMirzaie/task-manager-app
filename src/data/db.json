@@ -40,5 +40,42 @@
       "order": 1
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "id": "fd244033-dae9-41c7-a491-d71396e27844",
+      "title": "Snapp!",
+      "description": "Snapp team has added",
+      "columnId": "e1a22dd8-fb50-4dc8-90de-60b3ecf351e5"
+    },
+    {
+      "id": "4d636009-55e8-4ab5-9768-42c2afe7d96e",
+      "title": "Todo",
+      "description": "Add Todo for app\n",
+      "columnId": "03847fde-f03c-4f31-9c80-006e5f3cf2ba"
+    },
+    {
+      "id": "60ee8a26-a8f6-4699-a090-0ab5d535a42c",
+      "title": "Header UI",
+      "description": "Design landing page Header",
+      "columnId": "03847fde-f03c-4f31-9c80-006e5f3cf2ba"
+    },
+    {
+      "id": "b00dbeff-b44c-4de6-b42a-1ad0f59f6d2e",
+      "title": "Footer",
+      "description": "Design Footer",
+      "columnId": "03847fde-f03c-4f31-9c80-006e5f3cf2ba"
+    },
+    {
+      "id": "c4c3b21f-d068-47b3-a749-d96e3aa6f33d",
+      "title": "Fetch component",
+      "description": "make Fetch hook",
+      "columnId": "440fe549-e7e7-4a9c-8c44-b6c6303dc364"
+    },
+    {
+      "id": "41798ca8-2440-415a-bd3d-f27a1df0552a",
+      "title": "Tapsi",
+      "description": "Building Tapsi App",
+      "columnId": "e1a22dd8-fb50-4dc8-90de-60b3ecf351e5"
+    }
+  ]
 }

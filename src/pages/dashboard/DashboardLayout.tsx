@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { Board } from '../../components/dashboard/boards/Board';
 import { Navbar } from '../../components/navbar/Navbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
