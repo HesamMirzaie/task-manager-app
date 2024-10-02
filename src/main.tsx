@@ -15,8 +15,8 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   { path: '*', element: <PageNotFound /> },
   { path: '/', element: <HomePage /> },
-  { path: '/signup', element: <SignUp /> },
-  { path: '/login', element: <Login /> },
+  // { path: '/signup', element: <SignUp /> },
+  // { path: '/login', element: <Login /> },
   { path: '/dashboard', element: <KanbanDashboard /> },
   { path: '/dashboard/:boardId', element: <KanbanBoard /> },
 ]);

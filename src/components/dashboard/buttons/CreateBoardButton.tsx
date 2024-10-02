@@ -22,7 +22,7 @@ export const CreateBoardButton = () => {
   const [newBoardTitle, setNewBoardTitle] = useState<string>('');
   const [newBoardDescription, setNewBoardDescription] = useState<string>('');
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const queryClient = useQueryClient();
 
   const createBoardMutation = useMutation({
@@ -50,7 +50,7 @@ export const CreateBoardButton = () => {
       id: uuidv4(),
       board_title: newBoardTitle,
       board_description: newBoardDescription,
-      board_users: [user.email],
+      board_users: ['test'],
     };
 
     // ایجاد برد جدید
