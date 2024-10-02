@@ -9,7 +9,7 @@ import { IBoard, IColumn } from '../../types/types';
 export const DashboardLayout = () => {
   const [activeBoard, setActiveBoard] = useState<IBoard | null>(null);
 
-  const { data: columns = [] } = useQuery({
+  const { data: columns = [] } = useQuery<IColumn[]>({
     queryKey: ['columns'],
     queryFn: async () => {
       const response = await axios.get(`http://localhost:5000/columns`);

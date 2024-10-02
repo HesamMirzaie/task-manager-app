@@ -3,12 +3,18 @@ import { DragOverlay } from '@dnd-kit/core';
 import { ColumnCard } from './ColumnCard';
 import { SortableContext } from '@dnd-kit/sortable';
 import { createPortal } from 'react-dom';
+import { IColumn } from '../../../types/types';
+interface ColumnsContainerProps {
+  filteredColumns: IColumn[];
+  columnsId: any;
+  activeColumn: IColumn;
+}
 
 export const ColumnsContainer = ({
   filteredColumns,
   columnsId,
   activeColumn,
-}: any) => {
+}: ColumnsContainerProps) => {
   return (
     <div className="flex gap-4">
       <SortableContext items={columnsId}>

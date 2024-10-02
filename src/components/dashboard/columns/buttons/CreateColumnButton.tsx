@@ -1,16 +1,16 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
-import { TColumn } from '../../../../types/types';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { IColumn } from '../../../../types/types';
 
 export const CreateColumnButton = ({ activeBoard }: any) => {
   const queryClient = useQueryClient();
 
   // Mutation to add a new column
   const addColumnMutation = useMutation({
-    mutationFn: async (newColumn: TColumn) => {
-      const response = await axios.post<TColumn>(
+    mutationFn: async (newColumn: IColumn) => {
+      const response = await axios.post<IColumn>(
         `http://localhost:5000/columns`,
         newColumn
       );
@@ -19,7 +19,7 @@ export const CreateColumnButton = ({ activeBoard }: any) => {
     onSuccess: (data) => {
       queryClient.setQueryData(
         ['columns'],
-        (oldColumns: TColumn[] | undefined) => {
+        (oldColumns: IColumn[] | undefined) => {
           return oldColumns ? [...oldColumns, data] : [data];
         }
       );
@@ -30,10 +30,11 @@ export const CreateColumnButton = ({ activeBoard }: any) => {
   });
 
   const addColumn = () => {
-    const newColumn: TColumn = {
+    const newColumn: IColumn = {
       id: uuidv4(),
       title: 'New Column Title',
       boardId: activeBoard.id,
+      order: 0,
     };
 
     addColumnMutation.mutate(newColumn);

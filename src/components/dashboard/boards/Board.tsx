@@ -13,8 +13,14 @@ import {
 import { arrayMove } from '@dnd-kit/sortable';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios'; // Import Axios
+import { IBoard, IColumn } from '../../../types/types';
 
-export const Board = ({ activeBoard, filteredColumns }: any) => {
+interface BoardProps {
+  activeBoard: IBoard;
+  filteredColumns: IColumn[];
+}
+
+export const Board = ({ activeBoard, filteredColumns }: BoardProps) => {
   const [activeColumn, setActiveColumn] = useState<any>(null);
   const columnsId = useMemo(
     () => filteredColumns.map((col: any) => col.id),
@@ -60,12 +66,12 @@ export const Board = ({ activeBoard, filteredColumns }: any) => {
     }
   );
 
+  // Dnd Functions
   const onDragStart = (event: DragStartEvent) => {
     if (event.active.data.current?.type === 'column') {
       setActiveColumn(event.active.data.current.column);
     }
   };
-
   const onDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over) return;
@@ -88,7 +94,7 @@ export const Board = ({ activeBoard, filteredColumns }: any) => {
 
     updateColumnOrder.mutate(updatedColumns);
   };
-
+  // JSX
   return (
     <main>
       <BoardHeader activeBoard={activeBoard} />

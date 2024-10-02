@@ -1,7 +1,10 @@
+import { IBoard } from '../../../types/types';
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
 import { Button } from '../../ui/button';
-
-export const BoardHeader = ({ activeBoard }) => {
+interface BoardHeaderProps {
+  activeBoard: IBoard;
+}
+export const BoardHeader = ({ activeBoard }: BoardHeaderProps) => {
   return (
     <div className="flex justify-between items-center px-4 py-8 border-b">
       <h2 className="text-2xl font-semibold">{activeBoard.board_title}</h2>

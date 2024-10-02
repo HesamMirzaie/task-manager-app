@@ -3,8 +3,11 @@ import { useSortable } from '@dnd-kit/sortable';
 import { ColumnDropDown } from './buttons/ColumnDropDown';
 import { CSS } from '@dnd-kit/utilities';
 import { TaskContainer } from '../tasks/TaskContainer';
-
-export const ColumnCard = ({ column }: any) => {
+import { IColumn } from '../../../types/types';
+interface ColumnCardProps {
+  column: IColumn;
+}
+export const ColumnCard = ({ column }: ColumnCardProps) => {
   const {
     setNodeRef,
     attributes,
