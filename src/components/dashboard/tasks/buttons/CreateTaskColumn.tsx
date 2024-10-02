@@ -3,17 +3,14 @@ import { Button } from '../../../ui/button';
 import axios from 'axios';
 import { Plus } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
+import { ITask } from '../../../../types/types';
 
 export const CreateTaskColumn = ({ columnId }) => {
   const queryClient = useQueryClient();
 
   // Mutation برای اضافه کردن تسک جدید
   const addTaskMutation = useMutation({
-    mutationFn: async (newTask: {
-      id: string;
-      title: string;
-      columnId: string;
-    }) => {
+    mutationFn: async (newTask: ITask) => {
       return await axios.post('http://localhost:5000/tasks', newTask);
     },
     onSuccess: () => {
@@ -28,7 +25,8 @@ export const CreateTaskColumn = ({ columnId }) => {
     addTaskMutation.mutate({
       id: uuidv4(),
       title: 'Task',
-      columnId: columnId, // شناسه ستون مربوطه
+      description: '',
+      columnId: columnId,
     });
   };
   return (

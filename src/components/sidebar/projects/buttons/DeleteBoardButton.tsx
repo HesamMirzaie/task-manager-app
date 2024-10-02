@@ -36,28 +36,17 @@ export const DeleteBoardButton = ({ board, setActiveBoard }: any) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={(e) => {
-            e.stopPropagation();
-            setDeleteBoardId(board.id);
-          }}
-          className="text-gray-400 hover:text-red-400 transition-colors duration-200"
-        >
+        <Button variant="outline" className="w-full text-sm py-1 text-red-600">
           Delete
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent
-        onClick={(e) => e.stopPropagation()}
-        className="bg-gray-900 text-white border border-gray-700 rounded-lg shadow-2xl max-w-md mx-auto"
-      >
+      <AlertDialogContent className="bg-white text-gray-800">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-2xl font-bold text-red-400">
-            Delete Board
+          <AlertDialogTitle className="text-lg font-bold">
+            Confirm Deletion
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-gray-400 mt-2">
-            Are you sure you want to delete this board? This action cannot be
+          <AlertDialogDescription className="text-sm">
+            Are you sure you want to delete this Project? This action cannot be
             undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
@@ -66,7 +55,7 @@ export const DeleteBoardButton = ({ board, setActiveBoard }: any) => {
             <Button
               variant="outline"
               onClick={() => setDeleteBoardId(null)}
-              className="bg-transparent text-gray-300 border-gray-600 hover:bg-gray-800 hover:text-white transition-colors duration-200"
+              className="text-gray-600"
             >
               Cancel
             </Button>

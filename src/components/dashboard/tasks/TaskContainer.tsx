@@ -32,11 +32,9 @@ export const TaskContainer = ({ columnId }: { columnId: string }) => {
     <div className="flex flex-grow flex-col gap-4 p-2 overflow-x-hidden overflow-y-auto">
       <CreateTaskColumn columnId={columnId} />
 
-      {filteredTasks.length > 0 ? (
-        filteredTasks.map((task: any) => <TaskCard key={task.id} task={task} />)
-      ) : (
-        <div>No tasks for this column</div>
-      )}
+      {filteredTasks.map((task: any) => (
+        <TaskCard key={task.id} task={task} />
+      ))}
     </div>
   );
 };

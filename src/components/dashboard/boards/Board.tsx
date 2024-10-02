@@ -92,7 +92,7 @@ export const Board = ({ activeBoard, filteredColumns }: any) => {
   return (
     <main>
       <BoardHeader activeBoard={activeBoard} />
-      <div className="m-auto flex min-h-full w-full items-center overflow-x-auto overflow-y-hidden px-[40px] pt-[20px] bg-gray-50">
+      <div className="p-1 m-auto flex min-h-full w-full items-center overflow-x-auto overflow-y-hidden px-[40px] pt-[20px]">
         <DndContext
           sensors={sensors}
           onDragStart={onDragStart}

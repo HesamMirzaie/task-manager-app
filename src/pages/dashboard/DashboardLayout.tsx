@@ -24,7 +24,7 @@ export const DashboardLayout = () => {
     : [];
 
   return (
-    <div className="min-h-screen flex overflow-y-hidden">
+    <div className="h-screen w-screen flex overflow-y-hidden">
       <aside>
         <Sidebar activeBoard={activeBoard} setActiveBoard={setActiveBoard} />
       </aside>

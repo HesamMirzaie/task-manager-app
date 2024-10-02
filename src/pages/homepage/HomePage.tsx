@@ -5,12 +5,10 @@ import { motion } from 'framer-motion';
 import { ChevronRight, CheckCircle, Zap, Expand } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
-import useAuthStore from '../../store/useUser';
 
 export default function LandingPage() {
   const [isScrolling, setIsScrolling] = useState(false);
   const navigate = useNavigate();
-  const user = useAuthStore((state) => state.user);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,10 +41,10 @@ export default function LandingPage() {
               Task manager
             </a>
             <Button
-              onClick={() => navigate(`/${user ? 'dashboard' : 'login'}`)}
+              onClick={() => navigate('login')}
               className=" text-black border-white bg-indigo-300  hover:text-white transition-colors rounded-full"
             >
-              {user ? 'dashboard' : 'login'}
+              login
             </Button>
           </div>
         </div>

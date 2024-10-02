@@ -1,11 +1,18 @@
 import { EllipsisVertical } from 'lucide-react';
 import { Card } from '../../ui/card';
-import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
 import { EditBoardButton } from './buttons/EditBoardButton';
 import { DeleteBoardButton } from './buttons/DeleteBoardButton';
 import { Button } from '../../ui/button';
+import { useState } from 'react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '../../ui/dropdown-menu';
 
 export const ProjectCard = ({ board, activeBoard, setActiveBoard }: any) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
     <Card
       className={`w-full flex items-center h-12 mb-2 transition-colors cursor-pointer rounded-md shadow-sm border ${
@@ -30,15 +37,17 @@ export const ProjectCard = ({ board, activeBoard, setActiveBoard }: any) => {
           />
         </div>
         <p className="flex-1 ml-3 font-medium">{board.board_title}</p>
-        <Popover>
-          <PopoverTrigger>
-            <EllipsisVertical className="h-full w-full" />
-          </PopoverTrigger>
-          <PopoverContent className="bg-gray-100 border flex flex-col p-2 rounded-lg shadow-lg">
+        <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="p-2">
+              <EllipsisVertical className="w-5 h-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="space-y-1 bg-white rounded-md shadow-lg p-2 w-32">
             <EditBoardButton board={board} />
-            <DeleteBoardButton board={board} setActiveBoard={setActiveBoard} />
-          </PopoverContent>
-        </Popover>
+            <DeleteBoardButton board={board} />
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </Card>
   );

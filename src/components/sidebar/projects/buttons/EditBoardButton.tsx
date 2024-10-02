@@ -1,4 +1,3 @@
-import { Edit } from 'lucide-react';
 import { Button } from '../../../ui/button';
 import {
   Dialog,
@@ -14,10 +13,10 @@ import { Textarea } from '../../../ui/textarea';
 import { useState } from 'react';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Board } from '../../../../types/types';
+import { TBoard } from '../../../../types/types';
 
 export const EditBoardButton = ({ board }: any) => {
-  const [editBoard, setEditBoard] = useState<Board | null>(null);
+  const [editBoard, setEditBoard] = useState<TBoard | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
@@ -49,17 +48,8 @@ export const EditBoardButton = ({ board }: any) => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={(e) => {
-            e.stopPropagation();
-            setEditBoard({ ...board });
-            setIsDialogOpen(true);
-          }}
-          className="text-gray-500 hover:text-blue-600 transition-colors duration-200"
-        >
-          <span>Edit</span>
+        <Button variant="outline" className="w-full text-sm py-1">
+          Edit
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-white text-gray-800 border border-gray-300 rounded-lg shadow-xl max-w-md mx-auto">

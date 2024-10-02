@@ -15,10 +15,11 @@ import axios from 'axios';
 export const EditTaskButton = ({ taskId }: { taskId: string }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
   const queryClient = useQueryClient();
 
   const editTaskTitleMutation = useMutation({
-    mutationFn: async (updatedTask: { title: string }) => {
+    mutationFn: async (updatedTask: { title: string; description: string }) => {
       await axios.patch(`http://localhost:5000/tasks/${taskId}`, updatedTask);
     },
     onSuccess: () => {
@@ -33,7 +34,10 @@ export const EditTaskButton = ({ taskId }: { taskId: string }) => {
 
   const handleEditTitle = () => {
     if (newTitle.trim()) {
-      editTaskTitleMutation.mutate({ title: newTitle });
+      editTaskTitleMutation.mutate({
+        title: newTitle,
+        description: newDescription,
+      });
     }
   };
 
@@ -50,11 +54,23 @@ export const EditTaskButton = ({ taskId }: { taskId: string }) => {
             Edit Task Title
           </DialogTitle>
         </DialogHeader>
-        <div className="mt-4">
+        <div className=" space-y-2">
+          <p>Enter New Title</p>
+
           <Input
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
             placeholder="Enter new task title"
+            className="w-full"
+          />
+        </div>
+        <div className=" space-y-2">
+          <p>Enter New Description</p>
+
+          <Input
+            value={newDescription}
+            onChange={(e) => setNewDescription(e.target.value)}
+            placeholder="Enter new task description"
             className="w-full"
           />
         </div>
