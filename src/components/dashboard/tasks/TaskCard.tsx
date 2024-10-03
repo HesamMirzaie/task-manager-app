@@ -12,7 +12,7 @@ export const TaskCard = ({ task }: TaskCardProps) => {
       className=" border  bg-white  px-4 py-2 h-[200px] max-h-[200px]  flex flex-col justify-between text-left rounded-xl cursor-grab"
     >
       <div className=" flex items-center justify-between mb-2">
-        <Badge className=" bg-orange-200 text-orange-700">Design</Badge>
+        <Badge className=" bg-orange-200 text-orange-700">Badge</Badge>
         <TaskDropDown taskId={task.id} />
       </div>
       <div className=" flex-1 p-2">

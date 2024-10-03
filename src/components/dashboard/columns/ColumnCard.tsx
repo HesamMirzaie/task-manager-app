@@ -50,9 +50,6 @@ export const ColumnCard = ({ column }: ColumnCardProps) => {
         <div className="flex items-center">
           <div className="w-2 h-2 rounded-full bg-green-600 mr-2" />
           {column.title}
-          <div className="w-8 flex justify-center items-center px-2 py-1 text-sm bg-gray-100 rounded-md ml-2">
-            1
-          </div>
         </div>
         <ColumnDropDown columnId={column.id} />
       </div>
